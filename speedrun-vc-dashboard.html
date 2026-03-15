@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPEEDRUN × ISRAEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#f5b1d4;--accent-hover:#e89abe;--accent-light:#fdf0f6;--accent-dark:#c77da3;--dark:#0F0F0F;--surface:#fff;--surface-alt:#F7F7F8;--text:#1a1a1a;--text-sec:#666;--text-muted:#999;--border:#e2e2e2;--border-light:#f0f0f0;--success:#22c55e;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.08);--shadow-lg:0 12px 40px rgba(0,0,0,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--surface-alt);color:var(--text);line-height:1.6;min-height:100vh}
+.header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.header-inner{max-width:1400px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:1.3rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.brand span{color:var(--accent)}
+.nav-tabs{display:flex;gap:0;list-style:none}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-size:.88rem;font-weight:500;padding:8px 20px;border-bottom:2px solid transparent;transition:all .2s;font-family:'Poppins',sans-serif}
+.nav-btn:hover{color:#fff}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:16px}
+.user-badge{font-size:.82rem;color:rgba(255,255,255,.7);display:none}
+.logout-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 14px;border-radius:6px;cursor:pointer;font-size:.78rem;font-family:'Poppins',sans-serif;display:none;transition:all .2s}
+.logout-btn:hover{background:rgba(255,255,255,.2)}
+.main{max-width:1400px;margin:0 auto;padding:28px}
+.view{display:none}.view.active{display:block}
+.reg-container{max-width:480px;margin:60px auto;text-align:center}
+.reg-card{background:var(--surface);border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
+.reg-card h2{font-size:1.5rem;margin-bottom:6px;color:var(--dark)}
+.reg-card p{color:var(--text-sec);font-size:.9rem;margin-bottom:28px}
+.reg-card .accent{color:var(--accent)}
+.form-group{margin-bottom:16px;text-align:left}
+.form-label{display:block;font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:5px}
+.form-input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:'Poppins',sans-serif;transition:border .2s;background:var(--surface)}
+.form-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+textarea.form-input{resize:vertical;min-height:70px}
+select.form-input{cursor:pointer;appearance:auto}
+.btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;font-size:.88rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-sm{padding:6px 14px;font-size:.8rem;border-radius:6px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--accent);background:var(--accent-light)}
+.btn-success{background:var(--success);color:#fff;cursor:default}
+.btn-ghost{background:none;border:none;color:var(--text-sec);cursor:pointer;padding:4px 8px;font-size:1.1rem}.btn-ghost:hover{color:#dc2626}
+.section{margin-bottom:32px}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.add-fund-card{background:var(--surface);border:2px dashed var(--border);border-radius:var(--radius);padding:24px;margin-bottom:28px;transition:border-color .2s}
+.add-fund-card:hover{border-color:var(--accent)}
+.add-fund-card h3{font-size:1rem;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.add-fund-card h3 .plus{width:28px;height:28px;border-radius:50%;background:var(--accent-light);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
+.add-fund-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.add-fund-row .form-group{flex:1;min-width:160px;margin-bottom:0}
+.pipeline-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);overflow-x:auto;box-shadow:var(--shadow)}
+.pipeline-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.pipeline-table th{background:var(--dark);color:#fff;text-align:left;padding:12px 14px;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.pipeline-table td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:middle}
+.pipeline-table tr:hover{background:var(--accent-light)}
+.vc-name{font-weight:600;color:var(--dark)}
+.type-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600;background:var(--accent-light);color:var(--accent-dark);margin-left:6px}
+.pipeline-table select,.pipeline-table input[type="text"]{padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:.82rem;font-family:'Poppins',sans-serif;background:var(--surface)}
+.pipeline-table select:focus,.pipeline-table input:focus{outline:none;border-color:var(--accent)}
+.actions{display:flex;gap:6px;align-items:center;white-space:nowrap}
+.empty-state{text-align:center;padding:48px 20px;color:var(--text-sec)}
+.browse-toolbar{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.search-box{flex:1;min-width:200px;position:relative}
+.search-box input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--border);border-radius:8px;font-size:.88rem;font-family:'Poppins',sans-serif;background:var(--surface)}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+.filter-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:7px 16px;border:1px solid var(--border);border-radius:20px;cursor:pointer;background:var(--surface);color:var(--text);font-weight:500;font-size:.82rem;transition:all .2s;font-family:'Poppins',sans-serif}
+.chip:hover{border-color:var(--accent);background:var(--accent-light)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.vc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:20px}
+.vc-card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:20px;transition:all .25s;display:flex;flex-direction:column}
+.vc-card:hover{box-shadow:var(--shadow-md);border-color:var(--accent);transform:translateY(-2px)}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.card-logo{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
+.card-info{flex:1;min-width:0}
+.card-name{font-weight:700;font-size:.95rem;color:var(--dark);cursor:pointer;transition:color .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-name:hover{color:var(--accent)}
+.card-loc{font-size:.78rem;color:var(--text-sec)}
+.card-desc{font-size:.82rem;color:var(--text-sec);margin-bottom:14px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-bottom{display:flex;justify-content:space-between;align-items:center}
+.card-type{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:600;background:var(--accent-light);color:var(--accent-dark)}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--surface);border-radius:12px;padding:32px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:var(--shadow-lg)}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-sec);line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-box h2{font-size:1.3rem;font-weight:700;margin-bottom:4px;padding-right:30px}
+.modal-box .meta{font-size:.85rem;color:var(--text-sec);margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.modal-box .meta .tag{padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:600;background:var(--accent-light);color:var(--accent-dark)}
+.modal-section{margin-bottom:18px}
+.modal-section h4{font-size:.88rem;font-weight:600;color:var(--dark);margin-bottom:6px}
+.modal-section p{font-size:.85rem;color:var(--text-sec);line-height:1.65}
+.modal-section .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.modal-section .tags span{padding:3px 10px;background:var(--surface-alt);border-radius:8px;font-size:.78rem;color:var(--text-sec);border:1px solid var(--border-light)}
+.modal-footer{display:flex;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--border-light)}
+.intro-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:20px}
+.intro-overlay.active{display:flex}
+.intro-box{background:var(--surface);border-radius:12px;padding:32px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:var(--shadow-lg)}
+.intro-box h2{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.intro-box .vc-target{color:var(--accent);font-weight:600}
+.intro-box p.sub{font-size:.82rem;color:var(--text-sec);margin-bottom:20px}
+.file-upload input[type="file"]{width:100%;padding:10px;border:1px dashed var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:.85rem;cursor:pointer;background:var(--surface-alt)}
+.file-upload input[type="file"]:hover{border-color:var(--accent)}
+.file-name{font-size:.8rem;color:var(--text-sec);margin-top:4px}
+.success-msg{display:none;text-align:center;padding:30px 0}
+.success-msg.show{display:block}
+.success-msg .check{width:56px;height:56px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 12px}
+.success-msg h3{color:var(--dark);margin-bottom:4px}
+.success-msg p{color:var(--text-sec);font-size:.85rem}
+.admin-gate{max-width:400px;margin:60px auto;text-align:center}
+.admin-gate-card{background:var(--surface);padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
+.admin-gate-card h2{margin-bottom:6px}
+.admin-gate-card p{color:var(--text-sec);font-size:.88rem;margin-bottom:24px}
+.admin-gate-card .form-row{display:flex;gap:10px}
+.admin-gate-card .form-row input{flex:1}
+.admin-content{display:none}
+.admin-section{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:24px;margin-bottom:24px;box-shadow:var(--shadow)}
+.admin-section h3{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.admin-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.admin-table th{background:var(--surface-alt);text-align:left;padding:10px 12px;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;border-bottom:2px solid var(--border)}
+.admin-table td{padding:10px 12px;border-bottom:1px solid var(--border-light)}
+.admin-table select{padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:.82rem;font-family:'Poppins',sans-serif}
+.email-output{display:none;margin-top:16px}
+.email-output textarea{width:100%;min-height:200px;padding:14px;border:1px solid var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:.85rem;line-height:1.6;resize:vertical;background:var(--surface-alt)}
+.email-output textarea:focus{outline:none;border-color:var(--accent)}
+.email-actions{display:flex;gap:10px;margin-top:10px}
+/* WELCOME POPUP */
+.welcome-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.welcome-overlay.active{display:flex}
+.welcome-box{background:var(--surface);border-radius:16px;padding:40px 36px;max-width:540px;width:100%;text-align:center;box-shadow:var(--shadow-lg);position:relative}
+.welcome-box h2{font-size:1.6rem;font-weight:700;margin-bottom:6px;color:var(--dark)}
+.welcome-box h2 span{color:var(--accent)}
+.welcome-box .welcome-sub{color:var(--text-sec);font-size:.92rem;margin-bottom:28px}
+.welcome-steps{text-align:left;margin-bottom:28px}
+.welcome-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.welcome-step .step-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-light);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;font-weight:700}
+.welcome-step .step-text h4{font-size:.92rem;font-weight:600;color:var(--dark);margin-bottom:2px}
+.welcome-step .step-text p{font-size:.82rem;color:var(--text-sec);line-height:1.5}
+.welcome-highlight{background:var(--accent-light);border-radius:10px;padding:16px 20px;margin-bottom:24px;text-align:left}
+.welcome-highlight p{font-size:.85rem;color:var(--dark);line-height:1.6}
+.welcome-highlight strong{color:var(--accent-dark)}
+@media(max-width:768px){
+  .header-inner{padding:12px 16px}.brand{font-size:1.1rem}.main{padding:16px}
+  .add-fund-row{flex-direction:column}.browse-toolbar{flex-direction:column}
+  .pipeline-table{font-size:.78rem}.pipeline-table th,.pipeline-table td{padding:8px 6px}
+  .vc-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">SPEEDRUN <span>&times;</span> ISRAEL</div>
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-view="founder" onclick="switchView('founder')">Founder Dashboard</button>
+      <button class="nav-btn" data-view="admin" onclick="switchView('admin')">Admin Panel</button>
+    </nav>
+    <div class="header-right">
+      <span class="user-badge" id="userBadge"></span>
+      <button class="logout-btn" id="logoutBtn" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+<!-- WELCOME POPUP -->
+<div class="welcome-overlay" id="welcomePopup">
+  <div class="welcome-box">
+    <h2>Welcome to <span>Speedrun</span> &times; Israel</h2>
+    <p class="welcome-sub">Your VC pipeline, powered by Speedrun</p>
+    <div class="welcome-steps">
+      <div class="welcome-step">
+        <div class="step-icon">1</div>
+        <div class="step-text">
+          <h4>Build your pipeline</h4>
+          <p>Browse our curated list of 60+ VCs and angels active in Israel. Add the ones you're interested in to your personal list.</p>
+        </div>
+      </div>
+      <div class="welcome-step">
+        <div class="step-icon">2</div>
+        <div class="step-text">
+          <h4>Track your progress</h4>
+          <p>Rank each fund as Tier 1, 2, or 3. Update statuses as you go &mdash; whether you've emailed them, scheduled a meeting, or are still researching.</p>
+        </div>
+      </div>
+      <div class="welcome-step">
+        <div class="step-icon">3</div>
+        <div class="step-text">
+          <h4>Request intros from Speedrun</h4>
+          <p>All of these funds are looking to hear from us about you. Set a fund's status to "Intro by Speedrun" and we'll make the introduction.</p>
+        </div>
+      </div>
+    </div>
+    <div class="welcome-highlight">
+      <p>If we can be helpful connecting you to any of these investors, <strong>we would love to help</strong>. That's what we're here for.</p>
+    </div>
+    <button class="btn btn-primary" style="width:100%;font-size:1rem;padding:14px" onclick="closeWelcome()">Let's Go</button>
+  </div>
+</div>
+
+<div class="view active" id="founderView">
+  <div id="regSection">
+    <div class="reg-container">
+      <div class="reg-card">
+        <h2>Welcome to <span class="accent">Speedrun</span></h2>
+        <p>Register your company to start building your VC pipeline</p>
+        <form id="regForm">
+          <div class="form-group"><label class="form-label">Company Name *</label><input class="form-input" id="regCompany" required placeholder="Your startup name"></div>
+          <div class="form-group"><label class="form-label">Founder Full Name *</label><input class="form-input" id="regName" required placeholder="Your full name"></div>
+          <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="regEmail" required placeholder="you@company.com"></div>
+          <div class="form-group"><label class="form-label">LinkedIn Profile *</label><input class="form-input" id="regLinkedIn" required placeholder="https://linkedin.com/in/..."></div>
+          <div class="form-group"><label class="form-label">One-Liner / Blurb *</label><textarea class="form-input" id="regBlurb" required placeholder="What are you building and why it matters"></textarea></div>
+          <div class="form-group"><label class="form-label">Materials (optional)</label><div class="file-upload"><input type="file" id="regFile"><div class="file-name" id="regFileName"></div></div></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Get Started</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashSection" style="display:none">
+    <div class="add-fund-card">
+      <h3><span class="plus">+</span> Add a Fund</h3>
+      <form id="addFundForm" class="add-fund-row">
+        <div class="form-group"><label class="form-label">Fund Name *</label><input class="form-input" id="newFundName" required placeholder="e.g. Sequoia"></div>
+        <div class="form-group"><label class="form-label">Website</label><input class="form-input" id="newFundWeb" placeholder="https://..."></div>
+        <div class="form-group"><label class="form-label">Type</label><select class="form-input" id="newFundType"><option>Israeli</option><option>International</option><option>Angel</option></select></div>
+        <div class="form-group"><label class="form-label">Description</label><input class="form-input" id="newFundDesc" placeholder="Short description"></div>
+        <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button type="submit" class="btn btn-primary">Add</button></div>
+      </form>
+    </div>
+
+    <div class="section">
+      <div class="section-title">My VC Pipeline</div>
+      <div id="pipelineEmpty" class="empty-state"><p>No VCs in your pipeline yet.</p><p style="font-size:.82rem">Browse below to add funds to your list!</p></div>
+      <div class="pipeline-card" id="pipelineCard" style="display:none">
+        <table class="pipeline-table"><thead><tr><th>Fund</th><th>Tier</th><th>Status</th><th>Notes</th><th style="width:170px">Actions</th></tr></thead><tbody id="pipelineBody"></tbody></table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Browse & Add VCs</div>
+      <div class="browse-toolbar">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Search by name...">
+        </div>
+        <div class="filter-chips">
+          <button class="chip active" data-type="all" onclick="setFilter('all')">All</button>
+          <button class="chip" data-type="Israeli" onclick="setFilter('Israeli')">Israeli</button>
+          <button class="chip" data-type="International" onclick="setFilter('International')">International</button>
+          <button class="chip" data-type="Angel" onclick="setFilter('Angel')">Angel</button>
+        </div>
+      </div>
+      <div class="vc-grid" id="vcGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="adminView">
+  <div class="admin-gate" id="adminGate">
+    <div class="admin-gate-card">
+      <h2>Admin Panel</h2>
+      <p>Enter the admin password to continue</p>
+      <div class="form-row"><input class="form-input" type="password" id="adminPwd" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdmin()"><button class="btn btn-primary" onclick="checkAdmin()">Enter</button></div>
+    </div>
+  </div>
+  <div class="admin-content" id="adminContent">
+    <div class="admin-section">
+      <h3>Intro Request Queue</h3>
+      <div id="queueEmpty" class="empty-state" style="padding:24px"><p>No intro requests yet.</p></div>
+      <div style="overflow-x:auto"><table class="admin-table" id="queueTable" style="display:none"><thead><tr><th>Date</th><th>Company</th><th>LinkedIn</th><th>Target VC</th><th>One-Liner</th><th>Why This Fund</th><th>Intro Notes</th><th>Materials</th><th>Status</th></tr></thead><tbody id="queueBody"></tbody></table></div>
+    </div>
+    <div class="admin-section">
+      <h3>Generate Intro Email</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Founder Name</label><input class="form-input" id="emailFounder" placeholder="Founder name"></div>
+        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Company</label><input class="form-input" id="emailCompany" placeholder="Company name"></div>
+        <div class="form-group" style="flex:1.5;min-width:180px"><label class="form-label">One-Liner</label><input class="form-input" id="emailOneLiner" placeholder="What they're building"></div>
+        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Target VC</label><select class="form-input" id="emailVC"></select></div>
+        <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="generateEmail()">Generate</button></div>
+      </div>
+      <div class="email-output" id="emailOutput"><textarea id="emailText" rows="10"></textarea><div class="email-actions"><button class="btn btn-primary btn-sm" onclick="copyEmail()">Copy to Clipboard</button></div></div>
+    </div>
+    <div class="admin-section">
+      <h3>Manage VCs</h3>
+      <p style="font-size:.85rem;color:var(--text-sec);margin-bottom:12px">Add a new VC to the master database</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCName" placeholder="Fund Name"></div>
+        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCWeb" placeholder="Website"></div>
+        <div class="form-group" style="flex:0 0 140px"><select class="form-input" id="adminVCType"><option>Israeli</option><option>International</option><option>Angel</option></select></div>
+        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCDesc" placeholder="Short description"></div>
+        <div class="form-group" style="flex:0"><button class="btn btn-primary" onclick="adminAddVC()">Add VC</button></div>
+      </div>
+      <div id="customVCList" style="margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeDetail()">&times;</button>
+    <h2 id="detailName"></h2>
+    <div class="meta"><span id="detailLoc"></span><span class="tag" id="detailType"></span><a id="detailWeb" href="#" target="_blank" style="color:var(--accent);font-size:.85rem">Website &rarr;</a></div>
+    <div class="modal-section"><h4>About</h4><p id="detailLong"></p></div>
+    <div class="modal-section"><h4>Why This Fund for Israeli Founders</h4><p id="detailWhy"></p></div>
+    <div class="modal-section"><h4>Stages</h4><div class="tags" id="detailStages"></div></div>
+    <div class="modal-section"><h4>Sectors</h4><div class="tags" id="detailSectors"></div></div>
+    <div class="modal-section" id="detailPartnersSection"><h4>Key Partners</h4><div class="tags" id="detailPartners"></div></div>
+    <div class="modal-section" id="detailPortfolioSection"><h4>Portfolio</h4><div class="tags" id="detailPortfolio"></div></div>
+    <div class="modal-footer"><button class="btn btn-primary" id="detailAddBtn" onclick="addFromDetail()">Add to Pipeline</button></div>
+  </div>
+</div>
+
+<div class="intro-overlay" id="introModal">
+  <div class="intro-box">
+    <button class="modal-close" onclick="closeIntro()">&times;</button>
+    <h2>Request Intro</h2>
+    <p class="sub">to <span class="vc-target" id="introTarget"></span> via Speedrun</p>
+    <div id="introProfile" style="background:var(--surface-alt);border-radius:8px;padding:14px;margin-bottom:16px;font-size:.85rem">
+      <div style="font-weight:600;color:var(--dark)" id="introProfileName"></div>
+      <div style="color:var(--text-sec)" id="introProfileBlurb"></div>
+    </div>
+    <form id="introForm">
+      <div class="form-group"><label class="form-label">Why This Fund? (optional)</label><textarea class="form-input" id="introWhy" placeholder="Why do you think this fund is a good fit for your company?"></textarea></div>
+      <div class="form-group"><label class="form-label">Additional Notes for Speedrun Team (optional)</label><textarea class="form-input" id="introNotes" placeholder="Anything else the Speedrun team should know about this intro?"></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Submit Intro Request</button>
+    </form>
+    <div class="success-msg" id="introSuccess"><div class="check">&check;</div><h3>Request Submitted!</h3><p>The Speedrun team will review and respond within 48 hours.</p></div>
+  </div>
+</div>
+
+<script>
+const vcData = [
+  {
+    id: 1,
+    name: "91VC",
+    logo: "91V",
+    logoColor: "#DC2626",
+    website: "https://91vc.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","SaaS","Fintech","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Early-stage VC investing in category-defining technologies built by Israeli outliers. $500K-$1M checks.",
+    longDescription: "91VC invests in pre-seed and seed stage founders building breakthrough technologies. Known for deep Israeli expertise and category-defining theses.",
+    whyIsrael: "Founded by veteran Israeli investors with deep local knowledge. Focused exclusively on Israeli founders.",
+    keyPartners: ["Ovi Hamama","Kfir Kachlon"],
+    examplePortfolio: ["Datawizz.AI","lizo.AI","Skyhook","Axo"],
+    notes: "Writes checks from $500K to $1M at pre-seed. Strong hands-on approach to Israeli founders building AI and infrastructure.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 2,
+    name: "AnD Ventures",
+    logo: "AnD",
+    logoColor: "#0E7490",
+    website: "https://www.and-ventures.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","DeepTech","Cyber","Fintech","Gaming","HealthTech"],
+    activeInIsrael: true,
+    shortDescription: "Early-stage VC with unique Venture Studio model for pre-seed companies. Hands-on growth support and corporate partnerships.",
+    longDescription: "AnD Ventures operates a Venture Studio model, providing pre-seed support, hands-on mentorship, and access to corporate growth partners.",
+    whyIsrael: "Studio model provides pre-seed support and mentorship; access to corporate growth partners for Israeli founders.",
+    keyPartners: ["Roy Glasberg","Lee Moser","Ariel Cohen"],
+    examplePortfolio: ["Chronom.ai","Medint"],
+    notes: "Venture studio model is unique for pre-seed. Heavy hands-on support combined with corporate partnerships.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 3,
+    name: "AristaGora",
+    logo: "AG",
+    logoColor: "#1E40AF",
+    website: "https://www.aristagoravc.com",
+    location: "Tel Aviv & Tokyo, Israel",
+    type: "Israeli",
+    stages: ["Seed"],
+    sectors: ["AI","Cyber","Infra","DeepTech"],
+    activeInIsrael: true,
+    shortDescription: "Sector-agnostic Israeli-Japanese early-stage fund. Only multi-Japanese LP fund in Israel. $500K-$1.5M per company.",
+    longDescription: "AristaGora is a seed-stage fund bridging Israeli innovation with Japanese capital and markets. Only Israel-based VC with multiple Japanese LPs.",
+    whyIsrael: "Direct bridge to Japanese investors and market; hands-on approach; deep tech focus with Israeli founders.",
+    keyPartners: ["Anat Tila Cherni","Moshe Sarfaty","Takeshi Shinoda"],
+    examplePortfolio: ["NakAI","Faireez","SLED.AI"],
+    notes: "Only Israeli VC with dedicated Japanese LP base. Strong for founders seeking Japanese market access.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 4,
+    name: "Crescendo VP",
+    logo: "CV",
+    logoColor: "#059669",
+    website: "https://crescendovp.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","DevTools","SaaS","DeepTech"],
+    activeInIsrael: true,
+    shortDescription: "Israeli software VC investing in startups solving complex problems in big data, AI, and ML. Founded by ex-Giza Venture partners.",
+    longDescription: "Crescendo VP has $100M under management and focuses on Israeli software and AI companies. Partners bring 75+ years of cumulative VC experience.",
+    whyIsrael: "75+ years cumulative VC experience; access to European and LATAM markets via Swiss Crescendo Group.",
+    keyPartners: ["Zvi Schechter","Yuval Avni","Tal Mizrahi","Mark Kavelaars"],
+    examplePortfolio: ["Alison.AI","Bondata","Infinipoint"],
+    notes: "Part of larger Crescendo Group providing European and LATAM market access for Israeli companies.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 5,
+    name: "Disruptive AI",
+    logo: "DAI",
+    logoColor: "#7C3AED",
+    website: "https://www.disruptive-ai.com",
+    location: "Herzliya, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["AI"],
+    activeInIsrael: true,
+    shortDescription: "Israel's first VC specialized exclusively in AI startups from early-stage to growth. Founded 2020.",
+    longDescription: "Disruptive AI is Israel's premier AI-only venture fund, backing AI companies from seed through growth stage. Has proven Israeli unicorn track record.",
+    whyIsrael: "Specialized AI focus with Israeli unicorn track record (Verbit).",
+    keyPartners: ["Tal Barnoach","Yorai Fainmesser","Gadi Tirosh","Illit Geller"],
+    examplePortfolio: ["Verbit","IVIX","Spikerz","nSure.ai","Superlegal"],
+    notes: "AI-only fund with Israeli unicorn exits. Ideal for founders building AI-native products.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 6,
+    name: "Entrée Capital",
+    logo: "EC",
+    logoColor: "#DC2626",
+    website: "https://www.entreecapital.com",
+    location: "Tel Aviv, London & NYC, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed","Series A","Growth"],
+    sectors: ["AI","Cyber","DeepTech","Fintech","SaaS","Gaming"],
+    activeInIsrael: true,
+    shortDescription: "Global VC founded 2010 with 180+ startups and 43+ exits/IPOs including major Israeli tech companies.",
+    longDescription: "Entrée Capital manages $1.5B across 10 funds. Founded in 2010, they've backed 180+ startups with 43+ exits/IPOs including monday.com, Riskified, and Rapyd.",
+    whyIsrael: "Largest Israeli VC by AUM; exceptional exit track record; multi-stage support.",
+    keyPartners: ["Aviad Eyal","Ran Achituv","Yoni Osherov","Saul Levin"],
+    examplePortfolio: ["monday.com","Riskified","Rapyd","Talon Cyber","HiBob","Mesh Payments"],
+    notes: "Largest Israeli VC by AUM with multi-stage capabilities. Strong global network for Israeli founders.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 7,
+    name: "F2 Venture Capital",
+    logo: "F2",
+    logoColor: "#0891B2",
+    website: "https://www.f2fund.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","DevTools","Infra","Fintech","Cyber","Gaming"],
+    activeInIsrael: true,
+    shortDescription: "Israel's most active early-stage VC fund (2025 ranking). Operates The Junction pre-seed platform. Co-invests with a16z, Kleiner Perkins, Bessemer.",
+    longDescription: "F2 Venture Capital is Israel's most active seed-stage fund with $500M under management. They operate The Junction pre-seed platform and co-invest with top global VCs.",
+    whyIsrael: "Most active Israeli seed fund; earliest-stage focus; strong co-investment partnerships with top global VCs.",
+    keyPartners: ["Jonathan Saacks","Barak Rabinowitz","Maor Fridman","Eddy Shalev"],
+    examplePortfolio: [],
+    notes: "Most active Israeli seed fund in 2025. Best for founders seeking fast decisions and global co-investor access.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 8,
+    name: "Garage",
+    logo: "GG",
+    logoColor: "#1E293B",
+    website: "https://garage.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["Fintech","SaaS"],
+    activeInIsrael: true,
+    shortDescription: "Early-stage fintech and enterprise-tech venture fund combining VC, CVC, and venture studio. Equity-free workspace and LP data/systems access.",
+    longDescription: "Garage combines VC, CVC, and venture studio models for early-stage fintech and enterprise tech. Fund I is $100M; Fund II targeting $120M.",
+    whyIsrael: "Venture studio model with practical resources; banking partners for enterprise access.",
+    keyPartners: ["Omer","Eyal","Shay"],
+    examplePortfolio: [],
+    notes: "Venture studio model with equity-free workspace. Bank LPs (Leumi, Valley National) provide enterprise access.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 9,
+    name: "Glilot Capital Partners",
+    logo: "GCP",
+    logoColor: "#1D4ED8",
+    website: "https://www.glilot.com",
+    location: "Herzliya, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["Cyber","AI","DevTools","Infra"],
+    activeInIsrael: true,
+    shortDescription: "World's first cyber-focused VC, founded 2011. Ranked by Preqin as best performing fund worldwide four times.",
+    longDescription: "Glilot is the world's first cybersecurity-focused VC with $1.3B under management. Ranked best performing fund by Preqin four times with 24 successful exits.",
+    whyIsrael: "Specializes in Israeli cyber and enterprise software; deep domain expertise; 24 successful exits.",
+    keyPartners: ["Kobi Samboursky","Arik Kleinstein","Nofar Amikam","Lior Litwak"],
+    examplePortfolio: ["At-Bay","CyberX (Microsoft)","Cider Security (Palo Alto)","IntSights (Rapid7)","Noma Security"],
+    notes: "World's first cyber-focused VC with exceptional track record. Best for Israeli cyber founders.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 10,
+    name: "Grove Ventures",
+    logo: "GV",
+    logoColor: "#16A34A",
+    website: "https://grovevc.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","DeepTech","Infra","DevTools","HealthTech"],
+    activeInIsrael: true,
+    shortDescription: "Leading early-stage Israeli VC focused on deeptech and AI. Founded by Dov Moran (USB flash drive inventor) and Lior Handelsman (SolarEdge co-founder).",
+    longDescription: "Grove Ventures manages $500M+ and invests in seed/Series A deep tech and AI companies. Co-founded by Dov Moran and Lior Handelsman, both successful serial entrepreneurs.",
+    whyIsrael: "Partners are successful serial entrepreneurs; deep expertise in infrastructure, semiconductors, and enterprise software.",
+    keyPartners: ["Dov Moran","Lior Handelsman","Lotan Levkowitz","Renana Ashkenazi"],
+    examplePortfolio: ["Nucleai","TriEye","Quantum Source","Ramon.Space","ActiveFence","NoTraffic"],
+    notes: "Founded by serial entrepreneurs. Strong in deep tech, semiconductors, and hardware-adjacent software.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 11,
+    name: "Horizon Capital",
+    logo: "HC",
+    logoColor: "#EC4899",
+    website: "https://www.horizoncapital.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Israeli early-stage VC exclusively backing Israeli founders. 2 unicorns and 4 exits from 20-company portfolio.",
+    longDescription: "Horizon Capital exclusively backs Israeli founders with a concentrated portfolio. From just 20 companies, they have 2 unicorns and 4 exits.",
+    whyIsrael: "Exclusive Israeli focus; concentrated portfolio means high-touch support.",
+    keyPartners: ["Yaniv Jacobi","Lior Segal"],
+    examplePortfolio: ["Verbit","DataRails","OwnBackup","Identiq","Siteaware","Rep.ai"],
+    notes: "Concentrated portfolio means active board seats and hands-on support. Proven unicorn track record.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 12,
+    name: "Jibe VC",
+    logo: "JV",
+    logoColor: "#F59E0B",
+    website: "https://www.jibe.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed"],
+    sectors: ["Fintech","Cyber","HealthTech","AI","Consumer"],
+    activeInIsrael: true,
+    shortDescription: "Tel Aviv-based founders fund emphasizing human connection. Team building, ideation, and go-to-market support beyond capital.",
+    longDescription: "Jibe VC is a Tel Aviv-based seed fund led by VC veterans and successful entrepreneurs. Emphasizes founder support beyond capital with team building and GTM help.",
+    whyIsrael: "Designed for Israeli founders by entrepreneurs with proven exits.",
+    keyPartners: [],
+    examplePortfolio: ["Slice Global","Modulight","Notch","Ansa"],
+    notes: "Founders-first fund with strong emphasis on team building and support. Great for first-time founders.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 13,
+    name: "Kaedan",
+    logo: "KD",
+    logoColor: "#0EA5E9",
+    website: "https://www.kaedan.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","SaaS","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Entrepreneur-centric private investment firm focused on Israeli-related, seed to early-stage tech ventures.",
+    longDescription: "Kaedan invests in seed to early-stage Israeli tech companies with a portfolio of 40 companies including 1 unicorn.",
+    whyIsrael: "Direct focus on Israeli founders; deep local network.",
+    keyPartners: ["Ron Tamir","Ofer Lazovski","Ziv Yanous"],
+    examplePortfolio: [],
+    notes: "Entrepreneur-centric approach. Deep Israeli founder network.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 14,
+    name: "Mensch Capital",
+    logo: "MC",
+    logoColor: "#6366F1",
+    website: "https://www.menschtrust.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["Fintech","Cyber","AI"],
+    activeInIsrael: true,
+    shortDescription: "Global pre-seed and seed VC writing large checks up to $1M at pre-seed. Israeli affiliation.",
+    longDescription: "Mensch Capital is a pre-seed and seed VC with $30M under management, writing checks up to $1M at pre-seed stage.",
+    whyIsrael: "Pre-seed specialist with strong Israeli founder focus.",
+    keyPartners: ["Boaz Shedletsky"],
+    examplePortfolio: [],
+    notes: "Large pre-seed checks ($1M+). Great for Israeli founders at earliest stage.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 15,
+    name: "Pico Partners",
+    logo: "PP",
+    logoColor: "#D1D5DB",
+    website: "https://www.picopartners.vc",
+    location: "Jerusalem, Tel Aviv & NYC, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["Consumer","HealthTech","Cyber","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Top-performing Israeli early-stage VC with rare New York presence. Technology-enabled services solving market inefficiencies.",
+    longDescription: "Pico Partners manages $115M total with offices in Jerusalem, Tel Aviv, and NYC. Focus on technology-enabled consumer and enterprise services.",
+    whyIsrael: "Israeli fund with US presence; strong exits (Vroom to Cox Automotive).",
+    keyPartners: ["Elie Wurtman","Todd Kesselman","Gina LaVersa"],
+    examplePortfolio: ["Vroom","Spotinst","Gloat","K Health","Tastewise","ChargeAfter"],
+    notes: "Unique Israel + NYC presence. Strong exits track record.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 16,
+    name: "Picture Capital",
+    logo: "PC",
+    logoColor: "#3B82F6",
+    website: "https://picture.capital",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["Cyber","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Fund formed in 2024 by Israeli cybersecurity entrepreneurs to support Israeli tech post-Oct 2023.",
+    longDescription: "Picture Capital was founded in 2024 by successful Israeli cybersecurity entrepreneurs with $112M under management. Focus on cyber and infrastructure.",
+    whyIsrael: "Founded by successful Israeli cyber entrepreneurs; dedicated to Israeli tech support.",
+    keyPartners: ["Mickey Boodaei","Dan Amiga","Rakesh Loonkar","Mike Fey"],
+    examplePortfolio: ["Koi Security","Cortanix","ScaleOps","Gytpol","Legion"],
+    notes: "Recently formed by successful Israeli cyber founders. Strong for Israeli cyber companies.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 17,
+    name: "Qumra Capital",
+    logo: "QC",
+    logoColor: "#8B5CF6",
+    website: "https://www.qumracapital.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Growth"],
+    sectors: ["AI","Fintech","Consumer","Infra"],
+    activeInIsrael: true,
+    shortDescription: "First Israeli VC to focus on late-stage. 5 unicorns, 6 IPOs, 19 acquisitions.",
+    longDescription: "Qumra Capital manages $800M-$1B and is the first Israeli VC to specialize in growth-stage investing with exceptional exits including JFrog and Fiverr.",
+    whyIsrael: "Premier Israeli growth investor; proven ability to scale companies to IPO.",
+    keyPartners: ["Boaz Dinte","Erez Shachar","Reut Yehuda Golan","Boaz Morris"],
+    examplePortfolio: ["JFrog","Fiverr","AppsFlyer","DataRails","Buildots"],
+    notes: "Israeli growth-stage specialist with unicorn track record. Ideal for founders ready to scale.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 18,
+    name: "Random Forest VC",
+    logo: "RF",
+    logoColor: "#059669",
+    website: "https://www.randomforestvc.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI"],
+    activeInIsrael: true,
+    shortDescription: "Boutique fund for AI and ML ventures. In-house algorithm support and data science expertise.",
+    longDescription: "Random Forest VC is a boutique seed-stage fund with unique in-house ML engineering support for AI founders.",
+    whyIsrael: "Unique seed-stage capital with in-house ML development services.",
+    keyPartners: [],
+    examplePortfolio: ["qbiq","Eyecuracy","FeelBetter"],
+    notes: "AI-only fund with technical ML team support. Great for technical AI founders.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 19,
+    name: "Red Dot Capital",
+    logo: "RD",
+    logoColor: "#EF4444",
+    website: "https://www.reddotcapital.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["AI","Fintech","Cyber","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Israel-based early-growth stage fund. $10-20M initial checks. Exits include Global-e, Armis, Granulate.",
+    longDescription: "Red Dot Capital manages $750M in AUM and invests in seed through growth stage with sector-agnostic approach.",
+    whyIsrael: "Sector-agnostic; leads substantial rounds; proven Israeli growth exits.",
+    keyPartners: ["Yoram Oron","Yaniv Stern","Barak Salomon","Atad Peled"],
+    examplePortfolio: ["Global-e","Coralogix","Quantum Machines","Finout","Oligo","Bria AI","Ctera"],
+    notes: "Multi-stage with large checks. Strong on operational support for growth.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 20,
+    name: "Remagine Ventures",
+    logo: "RV",
+    logoColor: "#06B6D4",
+    website: "https://www.reimagine.vc",
+    location: "Tel Aviv & London, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Gaming","Consumer","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Pre-seed fund backing Israeli founders building AI-powered digital economy infrastructure and agents.",
+    longDescription: "Remagine Ventures manages $25M and focuses on pre-seed stage with $500K-$1M checks for Israeli AI and consumer founders.",
+    whyIsrael: "Specialized earliest-stage funding; follow-ons from a16z, General Catalyst.",
+    keyPartners: ["Kevin Baxpehler","Eze Vidra"],
+    examplePortfolio: ["Troup AI","Keewano","Minute Media","Dynamic Yield"],
+    notes: "Pre-seed specialist with strong upstream investor relationships.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 21,
+    name: "Selah",
+    logo: "SL",
+    logoColor: "#14B8A6",
+    website: "https://selah.vc",
+    location: "Israel & NYC",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Solo-GP fintech fund writing $250-500K first checks. Bridges US-Israel markets.",
+    longDescription: "Selah is a fintech-focused fund with $15M managing with solo GP Adi Levanon. Writes first checks from $250K-$500K.",
+    whyIsrael: "Highly specialized fintech; fast decisions; strong exits.",
+    keyPartners: ["Adi Levanon"],
+    examplePortfolio: ["Alloy ($1B+)","Unit ($1B+)","Justt","Dig Security (Palo Alto Networks)"],
+    notes: "Fintech specialist with fast decision-making. Strong track record of exits.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 22,
+    name: "TAU Ventures",
+    logo: "TV",
+    logoColor: "#F97316",
+    website: "https://www.tauventures.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","DeepTech","HealthTech","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Tel Aviv University's VC arm. Bridges academia and entrepreneurship. $1M initial checks.",
+    longDescription: "TAU Ventures is Tel Aviv University's venture fund with $70M managing. Brings academic resources and network to Israeli startups.",
+    whyIsrael: "University connection provides access to academic resources and talent pipeline.",
+    keyPartners: ["Nimrod Cohen"],
+    examplePortfolio: ["SWIMM","Gaviti","Xtend","Cyberpion","DigitalOwl","NeuraLegion"],
+    notes: "University-backed with unique academic resources. Good for deep tech founders.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 23,
+    name: "Team8",
+    logo: "T8",
+    logoColor: "#0EA5E9",
+    website: "https://www.team8.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["Cyber","AI","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Company-building platform founded by ex-Unit 8200 commander. Builds and invests in cyber, AI, fintech.",
+    longDescription: "Team8 is a company-building platform founded by Nadav Zafrir, former commander of Unit 8200. They both build and invest in early-stage startups.",
+    whyIsrael: "Epicenter of Israeli military intelligence meets venture capital.",
+    keyPartners: ["Nadav Zafrir","Israel Grimberg","Liran Grinberg"],
+    examplePortfolio: ["Claroty","Satori","Hyro","Dazz"],
+    notes: "Company-building model. Strong for cyber and first-time founders. Unit 8200 network access.",
+    introAvailable: true,
+    relationshipStrength: "Strong",
+  },
+  {
+    id: 24,
+    name: "TLV Partners",
+    logo: "TLP",
+    logoColor: "#7C3AED",
+    website: "https://www.tlv.partners",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","Cyber","Infra","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "Early-stage fund backing ambitious Israeli founders in deep tech. Highly technical investors.",
+    longDescription: "TLV Partners invests in seed and Series A stage Israeli tech founders with deep technical expertise.",
+    whyIsrael: "Israel-only fund deeply embedded in Tel Aviv tech community.",
+    keyPartners: ["Rona Segev","Shahar Tzafrir"],
+    examplePortfolio: ["Next Insurance","Aqua Security","Firebolt","Noname Security"],
+    notes: "Highly technical partners. Strong at building US GTM while maintaining Israeli R&D.",
+    introAvailable: true,
+    relationshipStrength: "Strong",
+  },
+  {
+    id: 25,
+    name: "Vertex Ventures Israel",
+    logo: "VVI",
+    logoColor: "#0369A1",
+    website: "https://www.vertex.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["Cyber","AI","Infra","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "One of Israel's longest-running VCs (est. 1997). Part of Temasek's Vertex global network. 3 IPOs, 27 acquisitions.",
+    longDescription: "Vertex Ventures Israel has been investing in Israeli startups since 1997. Part of Temasek's global platform with $3B+ AUM.",
+    whyIsrael: "Nearly 30 years investing in Israeli startups; Temasek opens Asia-Pacific doors.",
+    keyPartners: ["Emanuel Timor","Aviad Eyal"],
+    examplePortfolio: ["CyberArk","SolarEdge","Tenable","Silk"],
+    notes: "Longest-running Israeli VC. Temasek backing provides Asia-Pacific access.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 26,
+    name: "vgames",
+    logo: "VG",
+    logoColor: "#DC2626",
+    website: "https://www.vgames.vc",
+    location: "Israel",
+    type: "Israeli",
+    stages: ["Pre-Seed","Seed","Growth"],
+    sectors: ["Gaming"],
+    activeInIsrael: true,
+    shortDescription: "Israel's first and largest dedicated gaming VC. 38 investments. Backed by Viola Ventures.",
+    longDescription: "vgames manages $142M (Fund III) and is Israel's first dedicated gaming VC with 38 investments and major exits.",
+    whyIsrael: "Gaming specialist with massive exits; global reach with Israeli expertise.",
+    keyPartners: ["Eitan Reisel","Daniel Mironov","David Digmi"],
+    examplePortfolio: ["InnPlay Labs (Playtika $80M)","SuperPlay (Playtika $700M)","Candivore","1047 Games"],
+    notes: "Gaming-only fund. Israel is a global gaming hub. Strong exits.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 27,
+    name: "Viola Ventures",
+    logo: "VV",
+    logoColor: "#E11D48",
+    website: "https://www.viola.vc",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["AI","Cyber","Fintech","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Multi-stage Israeli fund with billions under management. Full ecosystem seed to IPO.",
+    longDescription: "Viola Ventures is Israel's most established investment group with multiple funds and billions in management.",
+    whyIsrael: "Most established Israeli investment group; deep local relationships.",
+    keyPartners: ["Harel Beit-On","Zvika Netter"],
+    examplePortfolio: ["ironSource","Payoneer","Outbrain","Cato Networks","Optimove"],
+    notes: "Full ecosystem support from seed to IPO. Best for serious scaling ambitions.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 28,
+    name: "Wix Ventures",
+    logo: "WV",
+    logoColor: "#4F46E5",
+    website: "https://www.wix.com/ventures",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","DevTools","Consumer","SaaS"],
+    activeInIsrael: true,
+    shortDescription: "Corporate VC arm of Wix.com. Invests in startups aligned with Wix platform and technology.",
+    longDescription: "Wix Ventures is the corporate VC of Wix with 235M+ users on the platform.",
+    whyIsrael: "Access to Wix's 235M+ users and platform; corporate partnership potential.",
+    keyPartners: ["Avishai Abrahami"],
+    examplePortfolio: [],
+    notes: "Corporate VC with access to massive Wix user base. Good for platform/developer tools.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 29,
+    name: "XT",
+    logo: "XT",
+    logoColor: "#06B6D4",
+    website: "https://www.xtholdings.com",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Series A","Growth"],
+    sectors: ["AI","HealthTech","Infra","DeepTech"],
+    activeInIsrael: true,
+    shortDescription: "Venture arm of XT Holdings. 20+ years investing in Israeli startups. 100 companies backed.",
+    longDescription: "XT is the venture arm of XT Holdings with 20+ years backing Israeli startups across 100 companies.",
+    whyIsrael: "Long-operating veteran fund with deep Israeli ecosystem relationships.",
+    keyPartners: ["Yoav Sebba","Ori Angel"],
+    examplePortfolio: ["Checkmarx","Lumenis","Sofwave","Cymbio","Duve"],
+    notes: "20+ years of Israeli investing. Strong operational support.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 30,
+    name: "YL Ventures",
+    logo: "YL",
+    logoColor: "#1D4ED8",
+    website: "https://ylventures.com",
+    location: "Tel Aviv & Silicon Valley",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["Cyber"],
+    activeInIsrael: true,
+    shortDescription: "Cybersecurity-only VC with $800M under management. Nearly two decades of partnering with top Israeli cyber founders.",
+    longDescription: "YL Ventures manages $800M exclusively in cybersecurity with offices in Tel Aviv and Silicon Valley.",
+    whyIsrael: "Dual Israel-Silicon Valley; ideal bridge for Israeli cyber founders. CISO Village network.",
+    keyPartners: ["Yoav Leitersdorf","Ofer Schreiber"],
+    examplePortfolio: ["Axonius","Orca Security","Hunters","Grip Security"],
+    notes: "Cyber-only VC. Strong CISO network. Best for Israeli cyber founders.",
+    introAvailable: true,
+    relationshipStrength: "Strong",
+  },
+  {
+    id: 31,
+    name: "Ibex Investors",
+    logo: "IBX",
+    logoColor: "#8B5CF6",
+    website: "https://www.ibexinvestors.com",
+    location: "Denver & Tel Aviv",
+    type: "International",
+    stages: ["Pre-Seed","Seed","Series A","Growth"],
+    sectors: ["AI","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Multi-strategy fund with Israel-dedicated funds since 2012. 40+ Israeli investments. Pre-seed to pre-IPO.",
+    longDescription: "Ibex Investors manages $1B+ with dedicated Israeli focus for 14+ years with 40+ Israeli investments.",
+    whyIsrael: "Full lifecycle capital; 14+ years investing in Israeli startups.",
+    keyPartners: [],
+    examplePortfolio: ["BeamUp","Appwrite","Honeycomb","Weka"],
+    notes: "Multi-stage fund with long Israeli track record.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 32,
+    name: "Battery Ventures",
+    logo: "BV",
+    logoColor: "#F97316",
+    website: "https://www.battery.com",
+    location: "Boston & Tel Aviv",
+    type: "International",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["SaaS","Fintech","Cyber","DevTools","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Large international VC with 30+ Israeli portfolio companies. Recently expanded Tel Aviv office.",
+    longDescription: "Battery Ventures manages $3.8B+ with dedicated Israeli team and 30+ Israeli portfolio companies over 15 years.",
+    whyIsrael: "Established Israel presence with dedicated partner; significant late-stage capacity.",
+    keyPartners: ["Shiran Shalev","Barak Schoster Goihman"],
+    examplePortfolio: ["Gong.io","HiBob","Habana Labs","GuardiCore","HoneyBook"],
+    notes: "Large fund with dedicated Israel presence. Multi-stage capability.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 33,
+    name: "Bessemer Venture Partners",
+    logo: "BVP",
+    logoColor: "#2563EB",
+    website: "https://www.bvp.com",
+    location: "San Francisco & Tel Aviv",
+    type: "International",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["AI","Cyber","Infra","Fintech","Consumer","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "Pioneer of Israel investing with 30+ years and dedicated Tel Aviv office.",
+    longDescription: "Bessemer manages $1B+ in Israel with 30+ year track record and dedicated Tel Aviv office.",
+    whyIsrael: "OG international Israel investor; widest sector coverage; local partner.",
+    keyPartners: ["Ariel Sterman"],
+    examplePortfolio: ["Wix","Fiverr","Axonius","Melio","HiBob","Legit Security"],
+    notes: "Pioneering Israel VC with broad sector coverage. Exceptional brand.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 34,
+    name: "BITKRAFT Esports Ventures",
+    logo: "BKEV",
+    logoColor: "#4F46E5",
+    website: "https://www.bitkraft.vc",
+    location: "Denver, USA",
+    type: "International",
+    stages: ["Seed","Series A"],
+    sectors: ["Gaming","Consumer","AI"],
+    activeInIsrael: true,
+    shortDescription: "Leading gaming and interactive media VC with $1B+ AUM. Six funds covering gaming, platforms, VR, and game mechanics.",
+    longDescription: "BITKRAFT manages $1B+ across six funds focused on gaming, web3, and immersive technology since 2016.",
+    whyIsrael: "Active in Israeli gaming investments. Israel has strong gaming industry.",
+    keyPartners: ["Jens Hilgers"],
+    examplePortfolio: [],
+    notes: "Gaming specialist. Israel has strong gaming talent pipeline.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 35,
+    name: "Clarim Ventures",
+    logo: "CL",
+    logoColor: "#0891B2",
+    website: "https://clarim.vc",
+    location: "Toronto, Canada",
+    type: "International",
+    stages: ["Seed"],
+    sectors: ["AI","Cyber","SaaS","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "Toronto-based seed fund with dedicated Israeli focus. $500K-$1.5M checks.",
+    longDescription: "Clarim invests in seed-stage Israeli tech companies with checks from $500K to $1.5M.",
+    whyIsrael: "Dedicated Israeli investment focus; Canadian market access.",
+    keyPartners: [],
+    examplePortfolio: ["Zeroport","Eikona","Munch","Limy","Mave AI"],
+    notes: "Israeli-focused seed fund. Canadian market entry point.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 36,
+    name: "Crane Venture Partners",
+    logo: "CR",
+    logoColor: "#0E7490",
+    website: "https://crane.vc",
+    location: "London",
+    type: "International",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","DevTools","Infra"],
+    activeInIsrael: true,
+    shortDescription: "London-based VC for digital infrastructure. 50% UK, rest across Europe, Israel, US.",
+    longDescription: "Crane manages $140M (Fund II) with significant Israel allocation for AI, data, and developer tools.",
+    whyIsrael: "Significant Israel allocation; European anchor investor option.",
+    keyPartners: ["Scott Sage","Krishna Visvanathan"],
+    examplePortfolio: ["SRE.ai"],
+    notes: "London-based with European presence. Good for EU market expansion.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 37,
+    name: "Cross Atlantic",
+    logo: "CA",
+    logoColor: "#1D4ED8",
+    website: "https://www.crossatlantic.eu",
+    location: "France/Israel/USA",
+    type: "International",
+    stages: ["Pre-Seed","Seed","Series A"],
+    sectors: ["AI","Infra","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "VC fund across France, Israel, and USA. Helping startups enter international marketplace.",
+    longDescription: "Cross Atlantic bridges Israeli startups with French and US markets.",
+    whyIsrael: "Bridges Israeli startups with French and US markets.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Multi-regional bridge. Good for founders targeting European or US markets.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 38,
+    name: "Insight Partners",
+    logo: "IP",
+    logoColor: "#10B981",
+    website: "https://www.insightpartners.com",
+    location: "NYC & Tel Aviv",
+    type: "International",
+    stages: ["Series A","Growth"],
+    sectors: ["AI","Cyber","Infra","DevTools","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Global software investor managing $90B AUM. In Israel since 2000. ScaleUp platform for operational support.",
+    longDescription: "Insight Partners manages $90B globally with dedicated Israel team since 2000.",
+    whyIsrael: "Dedicated Israel team; $90B AUM; ScaleUp operational resources.",
+    keyPartners: ["Teddie Wardi"],
+    examplePortfolio: ["Monday.com","Wix","SentinelOne","JFrog","WalkMe"],
+    notes: "Massive fund with global resources. ScaleUp platform is valuable.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 39,
+    name: "NFX",
+    logo: "NFX",
+    logoColor: "#F59E0B",
+    website: "https://www.nfx.com",
+    location: "San Francisco & Herzliya",
+    type: "International",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Fintech","Consumer"],
+    activeInIsrael: true,
+    shortDescription: "Seed-stage fund co-founded by Israeli Gigi Levy-Weiss. 40% of Fund IV targeting Israeli startups.",
+    longDescription: "NFX manages $1.5B AUM with 40% of new fund dedicated to Israeli startups.",
+    whyIsrael: "Largest dedicated investor in Israeli seed-stage; co-founder deeply embedded in Israeli tech.",
+    keyPartners: ["James Currier","Stan Chudnovsky","Gigi Levy-Weiss"],
+    examplePortfolio: [],
+    notes: "Largest dedicated Israeli seed investor. Gigi Levy-Weiss connection is strong.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 40,
+    name: "NightDragon",
+    logo: "ND",
+    logoColor: "#1E293B",
+    website: "https://www.nightdragon.com",
+    location: "San Francisco & Tel Aviv",
+    type: "International",
+    stages: ["Series A","Growth"],
+    sectors: ["Cyber","Defense"],
+    activeInIsrael: true,
+    shortDescription: "Cybersecurity and defense-focused investment firm. Opened Tel Aviv office in 2023.",
+    longDescription: "NightDragon manages $750M focused on cybersecurity and defense with Tel Aviv office opened 2023.",
+    whyIsrael: "Growth-stage cyber specialist; Tel Aviv office; deep operational cyber expertise.",
+    keyPartners: ["Dave DeWalt","Ken Gonzalez"],
+    examplePortfolio: ["Classiq","Saronic"],
+    notes: "Growth-stage cyber specialist. New to Israel but committed.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 41,
+    name: "Norwest Venture Partners",
+    logo: "NVP",
+    logoColor: "#0369A1",
+    website: "https://www.norwest.com/israel",
+    location: "Menlo Park & Herzliya",
+    type: "International",
+    stages: ["Seed","Series A","Growth"],
+    sectors: ["AI","Cyber","Infra","DevTools"],
+    activeInIsrael: true,
+    shortDescription: "Global fund with dedicated Israel practice led by Dror Nahumi. 30+ Israeli companies since 2004.",
+    longDescription: "Norwest manages multi-billion with dedicated Israeli office since 2009.",
+    whyIsrael: "15+ years Israel presence; multi-stage; strong security and SaaS focus.",
+    keyPartners: ["Dror Nahumi"],
+    examplePortfolio: [],
+    notes: "Long-running Israel presence. Global platform with local expertise.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 42,
+    name: "Seedcamp",
+    logo: "SC",
+    logoColor: "#F97316",
+    website: "https://seedcamp.com",
+    location: "London, UK",
+    type: "International",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Fintech","SaaS","HealthTech","Cyber"],
+    activeInIsrael: true,
+    shortDescription: "Europe's leading seed fund. 805+ investments. 5 unicorns.",
+    longDescription: "Seedcamp manages €166M (Fund VI) with 805+ investments and 5 unicorns globally.",
+    whyIsrael: "European market access; sector-agnostic; strong follow-on network.",
+    keyPartners: ["Reshma Sohoni","Carlos Espinal"],
+    examplePortfolio: ["Wise","Revolut","UiPath"],
+    notes: "Europe's leading seed fund. Strong alumni network.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 43,
+    name: "UpWest Labs",
+    logo: "UW",
+    logoColor: "#7C3AED",
+    website: "https://upwest.vc",
+    location: "Palo Alto & Tel Aviv",
+    type: "International",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Infra","DevTools","Fintech","Cyber","Consumer"],
+    activeInIsrael: true,
+    shortDescription: "Silicon Valley seed fund built exclusively for Israeli founders. Largest Israeli startup portfolio in US.",
+    longDescription: "UpWest manages $100M+ exclusively for Israeli entrepreneurs with portfolio valued at $20B+.",
+    whyIsrael: "Built for Israeli founders entering US market; portfolio valued at $20B+.",
+    keyPartners: ["Shuly Galili","Gil Ben-Artzy"],
+    examplePortfolio: ["SentinelOne","HoneyBook","CyCognito","CyberX","Stampli","BeeHero"],
+    notes: "Built for Israeli founders. Largest Israeli portfolio in Silicon Valley.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+  },
+  {
+    id: 44,
+    name: "Planven",
+    logo: "PV",
+    logoColor: "#6366F1",
+    website: "https://www.planven.com",
+    location: "Zurich & Tel Aviv",
+    type: "International",
+    stages: ["Series A","Growth"],
+    sectors: ["AI","Cyber","HealthTech"],
+    activeInIsrael: true,
+    shortDescription: "Swiss-based growth-stage VC with Israel office. Revenue-generating companies focus.",
+    longDescription: "Planven manages growth capital for Israeli companies with Swiss base.",
+    whyIsrael: "Growth capital for Israeli companies; Via IPO track record.",
+    keyPartners: ["Giovanni Canetta Roeder"],
+    examplePortfolio: ["Via","Ibex Medical","Nozomi Networks","BlueVoyant"],
+    notes: "Growth-stage focus. Swiss/Israeli bridge.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 45,
+    name: "ION Asset Management",
+    logo: "ION",
+    logoColor: "#0EA5E9",
+    website: "https://www.ioncrosspver.com",
+    location: "Herzliya",
+    type: "International",
+    stages: ["Growth"],
+    sectors: ["AI","Infra"],
+    activeInIsrael: true,
+    shortDescription: "ION Crossover Partners focuses on Israeli tech at global expansion and pre-IPO stages. $50-150M investments.",
+    longDescription: "ION Asset Management manages $2.5B+ AUM in growth-stage Israeli tech.",
+    whyIsrael: "Ideal for Israeli founders with revenue seeking growth capital toward IPO.",
+    keyPartners: ["Stephen Levey","Jonathan Half"],
+    examplePortfolio: [],
+    notes: "Growth and pre-IPO stage. Strong for Israeli unicorns scaling.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 46,
+    name: "IN Ventures",
+    logo: "INV",
+    logoColor: "#EC4899",
+    website: "https://in-ventures.co.il",
+    location: "Tel Aviv",
+    type: "International",
+    stages: ["Seed","Series A"],
+    sectors: ["AI","DeepTech","HealthTech","Infra","Cyber"],
+    activeInIsrael: true,
+    shortDescription: "Sumitomo Corporation's Israel-focused CVC launched 2019. Deep-tech focus.",
+    longDescription: "IN Ventures is Sumitomo's dedicated Israeli corporate VC with $100M managing.",
+    whyIsrael: "Access to Japanese market and Sumitomo's global industrial network.",
+    keyPartners: ["Sumitomo Corporation"],
+    examplePortfolio: ["Ottopia","GK8","Genoox","H2Pro","Classiq"],
+    notes: "Corporate VC with Japanese backing. Good for industrial/B2B plays.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 47,
+    name: "Ben Avner",
+    logo: "BA",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Active angel investor in the Israeli startup ecosystem. Invests at pre-seed and seed stages.",
+    longDescription: "Ben Avner is an active angel investor backing Israeli founders.",
+    whyIsrael: "Israeli angel investor with local connections.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 48,
+    name: "Daniel Herman",
+    logo: "DH",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Cyber"],
+    activeInIsrael: true,
+    shortDescription: "Angel investor backing Israeli tech founders at the earliest stages.",
+    longDescription: "Daniel Herman is an angel investor active in Israeli tech.",
+    whyIsrael: "Israeli angel investor.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 49,
+    name: "Idan Tamir",
+    logo: "IT",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["DevTools","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Angel investor focusing on Israeli early-stage tech startups.",
+    longDescription: "Idan Tamir is an angel investor in the Israeli startup ecosystem.",
+    whyIsrael: "Israeli angel investor.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 50,
+    name: "Kevin Louzoun",
+    logo: "KL",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","SaaS"],
+    activeInIsrael: true,
+    shortDescription: "Angel investor backing Israeli founders building innovative technologies.",
+    longDescription: "Kevin Louzoun is an angel investor in the Israeli tech space.",
+    whyIsrael: "Israeli angel investor.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 51,
+    name: "Nick Vilelle",
+    logo: "NV",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["Cyber","Fintech"],
+    activeInIsrael: true,
+    shortDescription: "Angel investor in the Israeli startup ecosystem.",
+    longDescription: "Nick Vilelle is an angel investor backing Israeli tech founders.",
+    whyIsrael: "Israeli angel investor.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    id: 52,
+    name: "Simon Legziel",
+    logo: "SL",
+    logoColor: "#6B7280",
+    type: "Angel",
+    website: "",
+    location: "Israel",
+    stages: ["Pre-Seed","Seed"],
+    sectors: ["AI","Consumer"],
+    activeInIsrael: true,
+    shortDescription: "Angel investor backing Israeli founders at the earliest stages of company building.",
+    longDescription: "Simon Legziel is an angel investor active in the Israeli startup ecosystem.",
+    whyIsrael: "Israeli angel investor.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Angel investor. Pre-seed and seed focus.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+  },
+  {
+    name: "AI10",
+    logo: "AI",
+    logoColor: "#6366F1",
+    website: "https://ai10.vc/",
+    location: "Israel",
+    type: "Israeli",
+    stages: ["Seed","Series A"],
+    sectors: ["AI"],
+    activeInIsrael: true,
+    shortDescription: "AI-focused venture fund investing in early-stage artificial intelligence startups.",
+    longDescription: "AI10 is an AI-focused venture fund targeting early-stage companies building transformative AI applications.",
+    whyIsrael: "Israel-based fund focused on the local AI ecosystem.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Emerging AI-focused fund. Limited public information available.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 53,
+  },
+  {
+    name: "Brightmind Partners",
+    logo: "BM",
+    logoColor: "#0891B2",
+    website: "https://brightmindscp.com/",
+    location: "Austin, Texas",
+    type: "International",
+    stages: ["Seed","Series A"],
+    sectors: ["Cyber","Enterprise","Infra"],
+    activeInIsrael: true,
+    shortDescription: "Early-stage VC specializing in cybersecurity and enterprise infrastructure. Founded 2024.",
+    longDescription: "Brightmind Partners is a newly founded (2024) VC firm specializing in early-stage investments in cybersecurity and enterprise technology companies. Leverages deep operational expertise to back visionary founders.",
+    whyIsrael: "Invests in cybersecurity and enterprise tech — sectors where Israeli founders excel globally.",
+    keyPartners: [],
+    examplePortfolio: ["Prelude Security","Vijil","SGNL"],
+    notes: "New fund (2024). Focus on cybersecurity and enterprise infrastructure aligns well with Israeli deep-tech strengths.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 54,
+  },
+  {
+    name: "Essentia VC",
+    logo: "EV",
+    logoColor: "#DC2626",
+    website: "https://www.essentia.vc/",
+    location: "San Francisco, CA",
+    type: "International",
+    stages: ["Seed","Series A","Series B"],
+    sectors: ["AI","Industrial","Energy","Automotive"],
+    activeInIsrael: true,
+    shortDescription: "Seed-stage VC catalyzing industrial transformation through AI. Targets 30%+ IRR with asset-light models.",
+    longDescription: "Essentia Ventures invests in seed-stage startups building AI for industrial sectors — automotive, energy, and manufacturing. Founded in 2022, the firm targets category-defining companies with rapid liquidity structures.",
+    whyIsrael: "Israel's deep expertise in AI and industrial automation aligns with Essentia's thesis. Possible Tel Aviv presence.",
+    keyPartners: [],
+    examplePortfolio: ["Intangible","Swift Navigation","Voaige"],
+    notes: "Industrial AI focus is a strong fit for Israeli deep-tech founders building vertical AI solutions.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 55,
+  },
+  {
+    name: "Evercore",
+    logo: "EC",
+    logoColor: "#1E3A5F",
+    website: "https://www.evercore.com/",
+    location: "New York, NY",
+    type: "International",
+    stages: ["Growth","Late Stage"],
+    sectors: ["M&A Advisory","Finance","Tech"],
+    activeInIsrael: true,
+    shortDescription: "Global independent investment banking advisory firm. Provides strategic M&A advice and capital markets services.",
+    longDescription: "Evercore is a leading global independent investment banking advisory firm founded in 1995. Provides strategic advice on mergers & acquisitions, divestitures, restructurings, and financings. While not a traditional VC, Evercore advises on growth-stage transactions.",
+    whyIsrael: "Advises on Israeli tech company transactions, M&A, and cross-border deals involving Israeli startups.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Investment banking advisory firm, not a traditional VC. Relevant for later-stage founders considering M&A or strategic transactions.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 56,
+  },
+  {
+    name: "FNX (Phoenix Financial)",
+    logo: "FNX",
+    logoColor: "#E97C00",
+    website: "https://www.fnx.co.il/",
+    location: "Tel Aviv, Israel",
+    type: "Israeli",
+    stages: ["Growth","Late Stage"],
+    sectors: ["Fintech","Software","Energy","AgriTech"],
+    activeInIsrael: true,
+    shortDescription: "Major Israeli financial conglomerate with $140B AUM. Invests in tech both directly and through VC partnerships.",
+    longDescription: "FNX (Phoenix Financial) is one of Israel's largest financial services groups, listed on TASE with $140 billion in assets under management. Operates across asset management, insurance, fund management, and credit origination. Invests in innovative technologies directly and through VC fund partnerships.",
+    whyIsrael: "Israel-based financial giant. Strategic corporate investor in Israel's tech and fintech ecosystem.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Corporate strategic investor rather than traditional VC. Can provide significant capital and distribution partnerships for growth-stage Israeli startups.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 57,
+  },
+  {
+    name: "IDB Invest",
+    logo: "IDB",
+    logoColor: "#0066B3",
+    website: "https://idbinvest.org/en",
+    location: "Washington D.C.",
+    type: "International",
+    stages: ["Growth"],
+    sectors: ["AgriTech","CleanTech","Water","Energy"],
+    activeInIsrael: true,
+    shortDescription: "Private sector arm of Inter-American Development Bank. Partners with Israel on agritech and climate innovation.",
+    longDescription: "IDB Invest is the private sector arm of the Inter-American Development Bank Group, providing capital and technical support to companies in Latin America and the Caribbean. Partners with Israel's government on development initiatives, leveraging Israeli expertise in water tech, sustainable agriculture, and cybersecurity.",
+    whyIsrael: "Israel partners with IDB on climate-smart agriculture and water technology programs. Gateway for Israeli startups to Latin American markets.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Development finance institution, not traditional VC. Relevant for Israeli startups targeting Latin American markets in agritech, water, and sustainability.",
+    introAvailable: true,
+    relationshipStrength: "Possible",
+    id: 58,
+  },
+  {
+    name: "Spider Capital",
+    logo: "SC",
+    logoColor: "#7C3AED",
+    website: "https://www.spidercapital.com/",
+    location: "San Francisco, CA",
+    type: "International",
+    stages: ["Seed","Series A","Series B"],
+    sectors: ["AI","Enterprise","SaaS","Cloud"],
+    activeInIsrael: true,
+    shortDescription: "Seed-stage VC focused on Applied AI software. 112 portfolio companies including 3 unicorns and 4 IPOs.",
+    longDescription: "Spider Capital is a seed-stage VC founded in 2015 with exclusive focus on next-generation Applied AI software companies. Invests across the US, Canada, Europe, and Israel. Portfolio includes 112 companies with 3 unicorns, 4 IPOs, and 49 acquisitions (PagerDuty, AppLovin, Okta).",
+    whyIsrael: "Explicitly invests in Israeli companies. Documented Israeli portfolio exposure through Startup Nation Central.",
+    keyPartners: [],
+    examplePortfolio: ["PagerDuty","AppLovin","Okta"],
+    notes: "Strong Applied AI thesis with proven Israeli investment track record. Provides hundreds of curated introductions to other VCs and F500 customers.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+    id: 59,
+  },
+  {
+    name: "Vintage Investment Partners",
+    logo: "VIP",
+    logoColor: "#1D4ED8",
+    website: "https://vintage-ip.com/",
+    location: "Herzliya, Israel",
+    type: "Israeli",
+    stages: ["Growth","Late Stage"],
+    sectors: ["Tech","Multi-Sector"],
+    activeInIsrael: true,
+    shortDescription: "Global VC platform with $4.3B AUM. Multi-strategy: fund-of-funds, secondaries, and direct growth investments.",
+    longDescription: "Vintage Investment Partners, founded in 2003, is a global venture capital platform based in Herzliya with $4.3 billion AUM. Operates a multi-strategy approach: fund-of-funds (investing in other VCs), secondary LP interests, and direct growth-stage investments. Maintains a database of 10,000+ companies and provides value-added services connecting startups with corporations.",
+    whyIsrael: "Israeli-based with deep roots in the Israeli startup ecosystem. Significant exposure to Israeli venture funds through fund-of-funds and secondary strategies.",
+    keyPartners: [],
+    examplePortfolio: [],
+    notes: "Multi-strategy platform. Recent fundraising: $200M Growth Fund IV, $500M fund-of-funds, $312M secondary fund. Uniquely positioned at the intersection of Israeli VC ecosystem.",
+    introAvailable: true,
+    relationshipStrength: "Warm",
+    id: 60,
+  }
+]
+
+
+// ===== APP STATE =====
+var currentUser = null;
+var pipeline = [];
+var customVCs = [];
+var introRequests = [];
+var searchQuery = '';
+var activeFilter = 'all';
+var selectedIntroVC = null;
+var _detailVcId = null;
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  loadData();
+  if (currentUser) {
+    showDashboard();
+  } else if (!localStorage.getItem('sr_welcomed')) {
+    document.getElementById('welcomePopup').classList.add('active');
+  }
+
+  document.getElementById('regForm').addEventListener('submit', handleReg);
+  document.getElementById('addFundForm').addEventListener('submit', handleAddFund);
+  document.getElementById('introForm').addEventListener('submit', handleIntroSubmit);
+  document.getElementById('regFile').addEventListener('change', function(e) {
+    var f = e.target.files[0];
+    document.getElementById('regFileName').textContent = f ? f.name : '';
+  });
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    searchQuery = e.target.value;
+    renderGrid();
+  });
+
+  renderGrid();
+  renderPipeline();
+  populateEmailVC();
+});
+
+// ===== DATA =====
+function getAllVCs() { return vcData.concat(customVCs); }
+
+function loadData() {
+  try {
+    var u = localStorage.getItem('sr_user');
+    if (u) currentUser = JSON.parse(u);
+    var p = localStorage.getItem('sr_pipeline');
+    if (p) pipeline = JSON.parse(p);
+    var c = localStorage.getItem('sr_custom');
+    if (c) customVCs = JSON.parse(c);
+    var r = localStorage.getItem('sr_requests');
+    if (r) introRequests = JSON.parse(r);
+  } catch(e) { console.error('Load error', e); }
+
+  if (currentUser) {
+    document.getElementById('userBadge').textContent = currentUser.company;
+    document.getElementById('userBadge').style.display = 'inline';
+    document.getElementById('logoutBtn').style.display = 'inline-block';
+  }
+}
+
+function saveData() {
+  localStorage.setItem('sr_pipeline', JSON.stringify(pipeline));
+  localStorage.setItem('sr_custom', JSON.stringify(customVCs));
+  localStorage.setItem('sr_requests', JSON.stringify(introRequests));
+}
+
+function closeWelcome() {
+  document.getElementById('welcomePopup').classList.remove('active');
+  localStorage.setItem('sr_welcomed', '1');
+}
+
+// ===== AUTH =====
+function handleReg(e) {
+  e.preventDefault();
+  currentUser = {
+    company: document.getElementById('regCompany').value,
+    name: document.getElementById('regName').value,
+    email: document.getElementById('regEmail').value,
+    linkedIn: document.getElementById('regLinkedIn').value,
+    blurb: document.getElementById('regBlurb').value,
+    materials: document.getElementById('regFileName').textContent || null
+  };
+  localStorage.setItem('sr_user', JSON.stringify(currentUser));
+  showDashboard();
+}
+
+function showDashboard() {
+  document.getElementById('regSection').style.display = 'none';
+  document.getElementById('dashSection').style.display = 'block';
+  document.getElementById('userBadge').textContent = currentUser.company;
+  document.getElementById('userBadge').style.display = 'inline';
+  document.getElementById('logoutBtn').style.display = 'inline-block';
+  renderGrid();
+  renderPipeline();
+}
+
+function logout() {
+  if (!confirm('Log out?')) return;
+  currentUser = null;
+  localStorage.removeItem('sr_user');
+  pipeline = [];
+  localStorage.removeItem('sr_pipeline');
+  document.getElementById('regSection').style.display = 'block';
+  document.getElementById('dashSection').style.display = 'none';
+  document.getElementById('userBadge').style.display = 'none';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('regForm').reset();
+}
+
+// ===== VIEWS =====
+function switchView(view) {
+  var views = document.querySelectorAll('.view');
+  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
+  var btns = document.querySelectorAll('.nav-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+
+  if (view === 'founder') {
+    document.getElementById('founderView').classList.add('active');
+    document.querySelector('[data-view="founder"]').classList.add('active');
+  } else if (view === 'admin') {
+    document.getElementById('adminView').classList.add('active');
+    document.querySelector('[data-view="admin"]').classList.add('active');
+    if (sessionStorage.getItem('sr_admin')) {
+      document.getElementById('adminGate').style.display = 'none';
+      document.getElementById('adminContent').style.display = 'block';
+      renderQueue();
+      renderCustomVCList();
+    } else {
+      document.getElementById('adminGate').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+    }
+  }
+}
+
+function checkAdmin() {
+  if (document.getElementById('adminPwd').value === 'speedrun2026') {
+    sessionStorage.setItem('sr_admin', '1');
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    renderQueue();
+    populateEmailVC();
+    renderCustomVCList();
+  } else {
+    alert('Incorrect password');
+  }
+}
+
+// ===== ADD FUND =====
+function handleAddFund(e) {
+  e.preventDefault();
+  var name = document.getElementById('newFundName').value.trim();
+  if (!name) return;
+
+  var ids = getAllVCs().map(function(v) { return v.id; });
+  var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0;
+  var vc = {
+    id: maxId + 1, name: name,
+    website: document.getElementById('newFundWeb').value || '',
+    type: document.getElementById('newFundType').value,
+    shortDescription: document.getElementById('newFundDesc').value || name,
+    longDescription: document.getElementById('newFundDesc').value || '',
+    logo: name.substring(0, 3).toUpperCase(),
+    logoColor: '#' + Math.floor(Math.random() * 0xCCCCCC + 0x333333).toString(16),
+    location: 'Custom', whyIsrael: '', keyPartners: [], examplePortfolio: [],
+    stages: [], sectors: [], activeInIsrael: true,
+    notes: '', introAvailable: true, relationshipStrength: 'New'
+  };
+  customVCs.push(vc);
+  saveData();
+  document.getElementById('addFundForm').reset();
+  renderGrid();
+}
+
+// ===== PIPELINE =====
+function addToPipeline(vcId) {
+  for (var i = 0; i < pipeline.length; i++) { if (pipeline[i].vcId === vcId) return; }
+  var vc = null;
+  var all = getAllVCs();
+  for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
+  if (!vc) return;
+  pipeline.push({ vcId: vcId, vcName: vc.name, tier: 'Tier 1', status: 'Researching', notes: '', dateAdded: new Date().toISOString() });
+  saveData(); renderGrid(); renderPipeline();
+}
+
+function removeFromPipeline(vcId) {
+  pipeline = pipeline.filter(function(p) { return p.vcId !== vcId; });
+  saveData(); renderGrid(); renderPipeline();
+}
+
+function updatePipeline(vcId, field, value) {
+  for (var i = 0; i < pipeline.length; i++) {
+    if (pipeline[i].vcId === vcId) { pipeline[i][field] = value; saveData(); break; }
+  }
+}
+
+function updatePipelineStatus(vcId, value) {
+  for (var i = 0; i < pipeline.length; i++) {
+    if (pipeline[i].vcId === vcId) { pipeline[i].status = value; saveData(); break; }
+  }
+  renderPipeline();
+}
+
+function renderPipeline() {
+  var empty = document.getElementById('pipelineEmpty');
+  var card = document.getElementById('pipelineCard');
+
+  if (pipeline.length === 0) { empty.style.display = 'block'; card.style.display = 'none'; return; }
+  empty.style.display = 'none'; card.style.display = 'block';
+
+  var tiers = ['Tier 1','Tier 2','Tier 3'];
+  var statuses = ['Researching','Looking for warm intro','Intro by Speedrun','Emailed','Meeting scheduled','In process','Passed'];
+
+  var html = '';
+  var all = getAllVCs();
+  for (var i = 0; i < pipeline.length; i++) {
+    var item = pipeline[i];
+    var vc = null;
+    for (var j = 0; j < all.length; j++) { if (all[j].id === item.vcId) { vc = all[j]; break; } }
+    var tp = vc ? vc.type : 'Custom';
+    var notesEsc = (item.notes || '').replace(/"/g, '&quot;');
+
+    var tierOpts = '';
+    for (var t = 0; t < tiers.length; t++) tierOpts += '<option' + (item.tier === tiers[t] ? ' selected' : '') + '>' + tiers[t] + '</option>';
+
+    var statusOpts = '';
+    for (var s = 0; s < statuses.length; s++) statusOpts += '<option' + (item.status === statuses[s] ? ' selected' : '') + '>' + statuses[s] + '</option>';
+
+    var introBtn = '';
+    if (item.status === 'Intro by Speedrun') {
+      introBtn = '<button class="btn btn-primary btn-sm" onclick="openIntro(' + item.vcId + ')">Request Intro</button>';
+    }
+
+    html += '<tr>' +
+      '<td><span class="vc-name">' + item.vcName + '</span><span class="type-tag">' + tp + '</span></td>' +
+      '<td><select onchange="updatePipeline(' + item.vcId + ',\'tier\',this.value)">' + tierOpts + '</select></td>' +
+      '<td><select onchange="updatePipelineStatus(' + item.vcId + ',this.value)">' + statusOpts + '</select></td>' +
+      '<td><input type="text" value="' + notesEsc + '" placeholder="Add notes..." onchange="updatePipeline(' + item.vcId + ',\'notes\',this.value)" style="width:100%"></td>' +
+      '<td><div class="actions">' + introBtn +
+      '<button class="btn-ghost" onclick="removeFromPipeline(' + item.vcId + ')" title="Remove">&times;</button></div></td>' +
+      '</tr>';
+  }
+  document.getElementById('pipelineBody').innerHTML = html;
+}
+
+// ===== BROWSE GRID =====
+function setFilter(type) {
+  activeFilter = type;
+  var chips = document.querySelectorAll('.chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+  var target = document.querySelector('.chip[data-type="' + type + '"]');
+  if (target) target.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  var all = getAllVCs();
+  var filtered = [];
+  for (var i = 0; i < all.length; i++) {
+    var vc = all[i];
+    if (activeFilter !== 'all' && vc.type !== activeFilter) continue;
+    if (searchQuery && vc.name.toLowerCase().indexOf(searchQuery.toLowerCase()) === -1) continue;
+    filtered.push(vc);
+  }
+
+  var html = '';
+  for (var i = 0; i < filtered.length; i++) {
+    var vc = filtered[i];
+    var inP = false;
+    for (var j = 0; j < pipeline.length; j++) { if (pipeline[j].vcId === vc.id) { inP = true; break; } }
+
+    var btnHtml = inP
+      ? '<button class="btn btn-success btn-sm" disabled>Added &#10003;</button>'
+      : '<button class="btn btn-primary btn-sm" onclick="addToPipeline(' + vc.id + ')">Add to Pipeline</button>';
+
+    html += '<div class="vc-card">' +
+      '<div class="card-top">' +
+        '<div class="card-logo" style="background:' + vc.logoColor + '">' + vc.logo + '</div>' +
+        '<div class="card-info">' +
+          '<div class="card-name" onclick="openDetail(' + vc.id + ')">' + vc.name + '</div>' +
+          '<div class="card-loc">' + vc.location + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-desc">' + vc.shortDescription + '</div>' +
+      '<div class="card-bottom">' +
+        '<span class="card-type">' + vc.type + '</span>' +
+        btnHtml +
+      '</div></div>';
+  }
+  document.getElementById('vcGrid').innerHTML = html;
+}
+
+// ===== DETAIL MODAL =====
+function openDetail(vcId) {
+  var all = getAllVCs();
+  var vc = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
+  if (!vc) return;
+  _detailVcId = vcId;
+
+  document.getElementById('detailName').textContent = vc.name;
+  document.getElementById('detailLoc').textContent = vc.location;
+  document.getElementById('detailType').textContent = vc.type;
+  document.getElementById('detailWeb').href = vc.website || '#';
+  document.getElementById('detailLong').textContent = vc.longDescription || vc.shortDescription;
+  document.getElementById('detailWhy').textContent = vc.whyIsrael || 'Active in the Israeli startup ecosystem.';
+
+  var stagesHtml = '';
+  if (vc.stages) for (var i = 0; i < vc.stages.length; i++) stagesHtml += '<span>' + vc.stages[i] + '</span>';
+  document.getElementById('detailStages').innerHTML = stagesHtml;
+
+  var sectorsHtml = '';
+  if (vc.sectors) for (var i = 0; i < vc.sectors.length; i++) sectorsHtml += '<span>' + vc.sectors[i] + '</span>';
+  document.getElementById('detailSectors').innerHTML = sectorsHtml;
+
+  var partners = vc.keyPartners || [];
+  document.getElementById('detailPartnersSection').style.display = partners.length ? 'block' : 'none';
+  var pH = '';
+  for (var i = 0; i < partners.length; i++) pH += '<span>' + partners[i] + '</span>';
+  document.getElementById('detailPartners').innerHTML = pH;
+
+  var portfolio = vc.examplePortfolio || [];
+  document.getElementById('detailPortfolioSection').style.display = portfolio.length ? 'block' : 'none';
+  var pfH = '';
+  for (var i = 0; i < portfolio.length; i++) pfH += '<span>' + portfolio[i] + '</span>';
+  document.getElementById('detailPortfolio').innerHTML = pfH;
+
+  var inP = false;
+  for (var i = 0; i < pipeline.length; i++) { if (pipeline[i].vcId === vcId) { inP = true; break; } }
+  var addBtn = document.getElementById('detailAddBtn');
+  if (inP) {
+    addBtn.textContent = 'Already in Pipeline \u2713';
+    addBtn.className = 'btn btn-success';
+    addBtn.disabled = true;
+  } else {
+    addBtn.textContent = 'Add to Pipeline';
+    addBtn.className = 'btn btn-primary';
+    addBtn.disabled = false;
+  }
+
+  document.getElementById('detailModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detailModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function addFromDetail() {
+  if (_detailVcId) addToPipeline(_detailVcId);
+  closeDetail();
+}
+
+// ===== INTRO MODAL =====
+function openIntro(vcId) {
+  selectedIntroVC = vcId;
+  var all = getAllVCs();
+  var vc = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
+  document.getElementById('introTarget').textContent = vc ? vc.name : '';
+  document.getElementById('introProfileName').textContent = currentUser ? currentUser.company + ' \u2014 ' + currentUser.name : '';
+  document.getElementById('introProfileBlurb').textContent = currentUser ? currentUser.blurb : '';
+  document.getElementById('introWhy').value = '';
+  document.getElementById('introNotes').value = '';
+  document.getElementById('introForm').style.display = 'block';
+  document.getElementById('introSuccess').classList.remove('show');
+  document.getElementById('introModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeIntro() {
+  document.getElementById('introModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleIntroSubmit(e) {
+  e.preventDefault();
+  var all = getAllVCs();
+  var vc = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === selectedIntroVC) { vc = all[i]; break; } }
+
+  var req = {
+    id: Date.now(),
+    date: new Date().toLocaleDateString(),
+    company: currentUser.company,
+    founder: currentUser.name,
+    linkedIn: currentUser.linkedIn,
+    oneLiner: currentUser.blurb,
+    materials: currentUser.materials || null,
+    targetVC: selectedIntroVC,
+    targetVCName: vc ? vc.name : '',
+    whyThisFund: document.getElementById('introWhy').value,
+    introNotes: document.getElementById('introNotes').value,
+    status: 'Pending'
+  };
+  introRequests.push(req);
+  saveData();
+
+  document.getElementById('introForm').style.display = 'none';
+  document.getElementById('introSuccess').classList.add('show');
+  setTimeout(function() { closeIntro(); renderPipeline(); }, 2000);
+}
+
+// ===== ADMIN =====
+function renderQueue() {
+  if (introRequests.length === 0) {
+    document.getElementById('queueEmpty').style.display = 'block';
+    document.getElementById('queueTable').style.display = 'none';
+    return;
+  }
+  document.getElementById('queueEmpty').style.display = 'none';
+  document.getElementById('queueTable').style.display = 'table';
+
+  var statuses = ['Pending','Reviewing','Intro Sent','Meeting Set','Passed'];
+  var html = '';
+  for (var i = 0; i < introRequests.length; i++) {
+    var r = introRequests[i];
+    var linkedInHtml = r.linkedIn ? '<a href="' + r.linkedIn + '" target="_blank" style="color:var(--accent)">Profile</a>' : '-';
+    var statusOpts = '';
+    for (var s = 0; s < statuses.length; s++) statusOpts += '<option' + (r.status === statuses[s] ? ' selected' : '') + '>' + statuses[s] + '</option>';
+
+    html += '<tr>' +
+      '<td>' + r.date + '</td>' +
+      '<td>' + r.company + '</td>' +
+      '<td>' + linkedInHtml + '</td>' +
+      '<td>' + r.targetVCName + '</td>' +
+      '<td style="max-width:200px">' + (r.oneLiner || '-') + '</td>' +
+      '<td style="max-width:150px">' + (r.whyThisFund || '-') + '</td>' +
+      '<td style="max-width:150px">' + (r.introNotes || '-') + '</td>' +
+      '<td>' + (r.materials || '-') + '</td>' +
+      '<td><select onchange="updateReqStatus(' + r.id + ',this.value)">' + statusOpts + '</select></td>' +
+      '</tr>';
+  }
+  document.getElementById('queueBody').innerHTML = html;
+}
+
+function updateReqStatus(id, status) {
+  for (var i = 0; i < introRequests.length; i++) {
+    if (introRequests[i].id === id) { introRequests[i].status = status; saveData(); break; }
+  }
+}
+
+function populateEmailVC() {
+  var sel = document.getElementById('emailVC');
+  if (!sel) return;
+  var all = getAllVCs();
+  var html = '<option value="">Select VC...</option>';
+  for (var i = 0; i < all.length; i++) html += '<option value="' + all[i].id + '">' + all[i].name + '</option>';
+  sel.innerHTML = html;
+}
+
+function generateEmail() {
+  var founder = document.getElementById('emailFounder').value;
+  var company = document.getElementById('emailCompany').value;
+  var oneLiner = document.getElementById('emailOneLiner').value;
+  var vcId = parseInt(document.getElementById('emailVC').value);
+  var all = getAllVCs();
+  var vc = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
+
+  if (!founder || !company || !oneLiner || !vc) { alert('Please fill in all fields'); return; }
+
+  var partnerName = (vc.keyPartners && vc.keyPartners.length > 0) ? vc.keyPartners[0] : vc.name + ' Team';
+  var sectorStr = (vc.sectors && vc.sectors.length > 0) ? vc.sectors.slice(0, 3).join(', ') : 'innovative technology';
+
+  var subject = 'Intro: ' + company + ' \u00D7 ' + vc.name + ' \u2014 via Speedrun';
+  var body = 'Hi ' + partnerName + ',\n\n' +
+    'I hope this message finds you well! I\'m reaching out from the Speedrun program (a16z) to introduce you to a founder we think could be a great fit for ' + vc.name + '.\n\n' +
+    founder + ' is building ' + company + ' \u2014 ' + oneLiner + '\n\n' +
+    'Given your focus on ' + sectorStr + ', I think there\'s a compelling alignment here.\n\n' +
+    'Would you be open to a brief intro? Happy to share more context or a deck if helpful.\n\n' +
+    'Best regards,\nSpeedrun Team';
+
+  document.getElementById('emailText').value = 'Subject: ' + subject + '\n\n' + body;
+  document.getElementById('emailOutput').style.display = 'block';
+}
+
+function copyEmail() {
+  var text = document.getElementById('emailText').value;
+  navigator.clipboard.writeText(text).then(function() {
+    alert('Copied to clipboard!');
+  });
+}
+
+function adminAddVC() {
+  var name = document.getElementById('adminVCName').value.trim();
+  if (!name) return;
+  var ids = getAllVCs().map(function(v) { return v.id; });
+  var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0;
+  customVCs.push({
+    id: maxId + 1, name: name,
+    website: document.getElementById('adminVCWeb').value || '',
+    type: document.getElementById('adminVCType').value,
+    shortDescription: document.getElementById('adminVCDesc').value || name,
+    longDescription: document.getElementById('adminVCDesc').value || '',
+    logo: name.substring(0, 3).toUpperCase(),
+    logoColor: '#' + Math.floor(Math.random() * 0xCCCCCC + 0x333333).toString(16),
+    location: 'Custom', whyIsrael: '', keyPartners: [], examplePortfolio: [],
+    stages: [], sectors: [], activeInIsrael: true, notes: '',
+    introAvailable: true, relationshipStrength: 'New'
+  });
+  saveData();
+  document.getElementById('adminVCName').value = '';
+  document.getElementById('adminVCWeb').value = '';
+  document.getElementById('adminVCDesc').value = '';
+  renderGrid(); populateEmailVC(); renderCustomVCList();
+}
+
+function renderCustomVCList() {
+  var el = document.getElementById('customVCList');
+  if (customVCs.length === 0) { el.innerHTML = ''; return; }
+  var html = '<p style="font-size:.82rem;color:var(--text-sec);margin-bottom:8px">Custom VCs added:</p>';
+  for (var i = 0; i < customVCs.length; i++) {
+    var vc = customVCs[i];
+    html += '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border-light)">' +
+      '<span style="font-weight:600;font-size:.85rem">' + vc.name + '</span>' +
+      '<span style="font-size:.78rem;color:var(--text-sec)">' + vc.type + '</span>' +
+      '<button class="btn-ghost" onclick="removeCustomVC(' + vc.id + ')" style="margin-left:auto">&times;</button></div>';
+  }
+  el.innerHTML = html;
+}
+
+function removeCustomVC(id) {
+  customVCs = customVCs.filter(function(v) { return v.id !== id; });
+  saveData(); renderGrid(); renderPipeline(); populateEmailVC(); renderCustomVCList();
+}
+
+// Close modals on overlay click
+document.getElementById('detailModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeDetail(); });
+document.getElementById('introModal').addEventListener('click', function(e) { if (e.target === e.currentTarget) closeIntro(); });
+
+</script>
+</body>
+</html>
