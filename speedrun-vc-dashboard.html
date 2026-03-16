@@ -13,16 +13,11 @@ body{font-family:'Poppins',sans-serif;background:var(--surface-alt);color:var(--
 .header-inner{max-width:1400px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .brand{font-size:1.3rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
 .brand span{color:var(--accent)}
-.nav-tabs{display:flex;gap:0;list-style:none}
-.nav-btn{background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-size:.88rem;font-weight:500;padding:8px 20px;border-bottom:2px solid transparent;transition:all .2s;font-family:'Poppins',sans-serif}
-.nav-btn:hover{color:#fff}
-.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .header-right{display:flex;align-items:center;gap:16px}
 .user-badge{font-size:.82rem;color:rgba(255,255,255,.7);display:none}
 .logout-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 14px;border-radius:6px;cursor:pointer;font-size:.78rem;font-family:'Poppins',sans-serif;display:none;transition:all .2s}
 .logout-btn:hover{background:rgba(255,255,255,.2)}
 .main{max-width:1400px;margin:0 auto;padding:28px}
-.view{display:none}.view.active{display:block}
 .reg-container{max-width:480px;margin:60px auto;text-align:center}
 .reg-card{background:var(--surface);border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
 .reg-card h2{font-size:1.5rem;margin-bottom:6px;color:var(--dark)}
@@ -80,6 +75,7 @@ select.form-input{cursor:pointer;appearance:auto}
 .card-desc{font-size:.82rem;color:var(--text-sec);margin-bottom:14px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card-bottom{display:flex;justify-content:space-between;align-items:center}
 .card-type{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:600;background:var(--accent-light);color:var(--accent-dark)}
+/* MODALS */
 .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.active{display:flex}
 .modal-box{background:var(--surface);border-radius:12px;padding:32px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:var(--shadow-lg)}
@@ -108,23 +104,41 @@ select.form-input{cursor:pointer;appearance:auto}
 .success-msg .check{width:56px;height:56px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 12px}
 .success-msg h3{color:var(--dark);margin-bottom:4px}
 .success-msg p{color:var(--text-sec);font-size:.85rem}
-.admin-gate{max-width:400px;margin:60px auto;text-align:center}
-.admin-gate-card{background:var(--surface);padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
-.admin-gate-card h2{margin-bottom:6px}
-.admin-gate-card p{color:var(--text-sec);font-size:.88rem;margin-bottom:24px}
-.admin-gate-card .form-row{display:flex;gap:10px}
-.admin-gate-card .form-row input{flex:1}
-.admin-content{display:none}
-.admin-section{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:24px;margin-bottom:24px;box-shadow:var(--shadow)}
-.admin-section h3{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.admin-table{width:100%;border-collapse:collapse;font-size:.83rem}
-.admin-table th{background:var(--surface-alt);text-align:left;padding:10px 12px;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;border-bottom:2px solid var(--border)}
-.admin-table td{padding:10px 12px;border-bottom:1px solid var(--border-light)}
-.admin-table select{padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:.82rem;font-family:'Poppins',sans-serif}
+/* ADMIN POPUP MODAL */
+.admin-backdrop{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:400;align-items:center;justify-content:center;padding:24px}
+.admin-backdrop.active{display:flex}
+.admin-panel{background:var(--surface);border-radius:14px;width:960px;max-width:96vw;max-height:92vh;z-index:401;box-shadow:0 20px 60px rgba(0,0,0,.25);display:flex;flex-direction:column;opacity:0;transform:scale(.96);transition:opacity .25s ease,transform .25s ease}
+.admin-panel.open{opacity:1;transform:scale(1)}
+.admin-panel-header{background:var(--dark);color:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-radius:14px 14px 0 0}
+.admin-panel-header h2{font-size:1.1rem;font-weight:700}
+.admin-panel-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:1.4rem;cursor:pointer;padding:4px 8px}
+.admin-panel-close:hover{color:#fff}
+.admin-panel-body{padding:24px;flex:1;overflow-y:auto;border-radius:0 0 14px 14px}
+.admin-gate-inline{text-align:center;padding:60px 24px}
+.admin-gate-inline p{color:var(--text-sec);font-size:.88rem;margin-bottom:20px}
+.admin-gate-inline .form-row{display:flex;gap:10px;max-width:320px;margin:0 auto}
+.admin-gate-inline .form-row input{flex:1}
+.admin-section{background:var(--surface-alt);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.admin-section h3{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.admin-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.admin-table th{background:var(--dark);color:#fff;text-align:left;padding:8px 10px;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+.admin-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);font-size:.8rem}
+.admin-table tr:hover{background:var(--accent-light)}
+.admin-table select{padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:.78rem;font-family:'Poppins',sans-serif}
 .email-output{display:none;margin-top:16px}
-.email-output textarea{width:100%;min-height:200px;padding:14px;border:1px solid var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:.85rem;line-height:1.6;resize:vertical;background:var(--surface-alt)}
+.email-output textarea{width:100%;min-height:180px;padding:12px;border:1px solid var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:.82rem;line-height:1.6;resize:vertical;background:var(--surface)}
 .email-output textarea:focus{outline:none;border-color:var(--accent)}
 .email-actions{display:flex;gap:10px;margin-top:10px}
+/* Founder pipeline accordion in admin */
+.founder-accordion{margin-bottom:12px}
+.founder-acc-header{background:var(--surface);border:1px solid var(--border-light);border-radius:8px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+.founder-acc-header:hover{border-color:var(--accent);background:var(--accent-light)}
+.founder-acc-header .fa-name{font-weight:600;font-size:.88rem;color:var(--dark)}
+.founder-acc-header .fa-meta{font-size:.78rem;color:var(--text-sec)}
+.founder-acc-header .fa-arrow{transition:transform .2s;color:var(--text-sec)}
+.founder-acc-header.expanded .fa-arrow{transform:rotate(180deg)}
+.founder-acc-body{display:none;padding:12px 16px;border:1px solid var(--border-light);border-top:none;border-radius:0 0 8px 8px;background:var(--surface)}
+.founder-acc-body.show{display:block}
 /* WELCOME POPUP */
 .welcome-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
 .welcome-overlay.active{display:flex}
@@ -145,7 +159,11 @@ select.form-input{cursor:pointer;appearance:auto}
   .add-fund-row{flex-direction:column}.browse-toolbar{flex-direction:column}
   .pipeline-table{font-size:.78rem}.pipeline-table th,.pipeline-table td{padding:8px 6px}
   .vc-grid{grid-template-columns:1fr}
+  .admin-panel{width:100%;max-width:100%;max-height:100vh;border-radius:0}
 }
+.admin-fab{position:fixed;bottom:24px;right:24px;height:42px;border-radius:21px;background:var(--dark);border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-size:.82rem;font-weight:600;color:#fff;padding:0 16px 0 12px;z-index:99;box-shadow:var(--shadow-md);transition:all .2s;font-family:'Poppins',sans-serif}
+.admin-fab:hover{transform:scale(1.05);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.admin-fab .fab-icon{font-size:1.1rem}
 </style>
 </head>
 <body>
@@ -153,10 +171,6 @@ select.form-input{cursor:pointer;appearance:auto}
 <header class="header">
   <div class="header-inner">
     <div class="brand">SPEEDRUN <span>&times;</span> ISRAEL</div>
-    <nav class="nav-tabs">
-      <button class="nav-btn active" data-view="founder" onclick="switchView('founder')">Founder Dashboard</button>
-      <button class="nav-btn" data-view="admin" onclick="switchView('admin')">Admin Panel</button>
-    </nav>
     <div class="header-right">
       <span class="user-badge" id="userBadge"></span>
       <button class="logout-btn" id="logoutBtn" onclick="logout()">Log out</button>
@@ -201,106 +215,163 @@ select.form-input{cursor:pointer;appearance:auto}
   </div>
 </div>
 
-<div class="view active" id="founderView">
-  <div id="regSection">
-    <div class="reg-container">
-      <div class="reg-card">
-        <h2>Welcome to <span class="accent">Speedrun</span></h2>
-        <p>Register your company to start building your VC pipeline</p>
-        <form id="regForm">
-          <div class="form-group"><label class="form-label">Company Name *</label><input class="form-input" id="regCompany" required placeholder="Your startup name"></div>
-          <div class="form-group"><label class="form-label">Founder Full Name *</label><input class="form-input" id="regName" required placeholder="Your full name"></div>
-          <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="regEmail" required placeholder="you@company.com"></div>
-          <div class="form-group"><label class="form-label">LinkedIn Profile *</label><input class="form-input" id="regLinkedIn" required placeholder="https://linkedin.com/in/..."></div>
-          <div class="form-group"><label class="form-label">One-Liner / Blurb *</label><textarea class="form-input" id="regBlurb" required placeholder="What are you building and why it matters"></textarea></div>
-          <div class="form-group"><label class="form-label">Materials (optional)</label><div class="file-upload"><input type="file" id="regFile"><div class="file-name" id="regFileName"></div></div></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Get Started</button>
-        </form>
+<div id="regSection">
+  <div class="reg-container">
+    <!-- SIGN IN -->
+    <div class="reg-card" id="signInCard">
+      <h2>Welcome back to your fundraising pipeline by <span class="accent">Speedrun</span></h2>
+      <p>Sign in with your email to access your pipeline</p>
+      <form id="signInForm">
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="signInEmail" required placeholder="you@company.com"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Sign In</button>
+      </form>
+      <div id="signInError" style="display:none;margin-top:12px;padding:10px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.82rem;text-align:center">No account found with that email. Please register below.</div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-light);text-align:center">
+        <p style="font-size:.82rem;color:var(--text-sec);margin-bottom:8px">First time here?</p>
+        <button class="btn btn-outline btn-sm" onclick="showRegForm()">Register your company</button>
+      </div>
+    </div>
+    <!-- REGISTER -->
+    <div class="reg-card" id="regCard" style="display:none">
+      <h2>Register for your fundraising pipeline by <span class="accent">Speedrun</span></h2>
+      <p>Set up your profile to start building your VC pipeline</p>
+      <form id="regForm">
+        <div class="form-group"><label class="form-label">Company Name *</label><input class="form-input" id="regCompany" required placeholder="Your startup name"></div>
+        <div class="form-group"><label class="form-label">Founder Full Name *</label><input class="form-input" id="regName" required placeholder="Your full name"></div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="regEmail" required placeholder="you@company.com"></div>
+        <div class="form-group"><label class="form-label">LinkedIn Profile *</label><input class="form-input" id="regLinkedIn" required placeholder="https://linkedin.com/in/..."></div>
+        <div class="form-group"><label class="form-label">One-Liner / Blurb *</label><textarea class="form-input" id="regBlurb" required placeholder="What are you building and why it matters"></textarea></div>
+        <div class="form-group"><label class="form-label">Materials (optional)</label><div class="file-upload"><input type="file" id="regFile"><div class="file-name" id="regFileName"></div></div></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Get Started</button>
+      </form>
+      <div style="margin-top:16px;text-align:center">
+        <button style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:.82rem;font-family:'Poppins',sans-serif;text-decoration:underline" onclick="showSignIn()">Already registered? Sign in</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div id="dashSection" style="display:none">
-    <div class="add-fund-card">
-      <h3><span class="plus">+</span> Add a Fund</h3>
-      <form id="addFundForm" class="add-fund-row">
+<div id="dashSection" style="display:none">
+  <div class="section">
+    <div class="section-title" style="justify-content:space-between"><span>My VC Pipeline</span><button class="btn btn-outline btn-sm" id="exportBtn" style="display:none" onclick="exportPipeline()">Export CSV</button></div>
+    <div id="pipelineEmpty" class="empty-state"><p>No VCs in your pipeline yet.</p><p style="font-size:.82rem">Browse below to add funds to your list!</p></div>
+    <div class="pipeline-card" id="pipelineCard" style="display:none">
+      <table class="pipeline-table"><thead><tr><th>Fund</th><th>Tier</th><th>Status</th><th>Notes</th><th style="width:170px">Actions</th></tr></thead><tbody id="pipelineBody"></tbody></table>
+    </div>
+  </div>
+
+  <div class="add-fund-card">
+    <h3><span class="plus">+</span> Add a Fund</h3>
+    <form id="addFundForm">
+      <div class="add-fund-row" style="margin-bottom:12px">
         <div class="form-group"><label class="form-label">Fund Name *</label><input class="form-input" id="newFundName" required placeholder="e.g. Sequoia"></div>
         <div class="form-group"><label class="form-label">Website</label><input class="form-input" id="newFundWeb" placeholder="https://..."></div>
         <div class="form-group"><label class="form-label">Type</label><select class="form-input" id="newFundType"><option>Israeli</option><option>International</option><option>Angel</option></select></div>
-        <div class="form-group"><label class="form-label">Description</label><input class="form-input" id="newFundDesc" placeholder="Short description"></div>
-        <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button type="submit" class="btn btn-primary">Add</button></div>
-      </form>
-    </div>
+        <div class="form-group"><label class="form-label">Location</label><input class="form-input" id="newFundLoc" placeholder="e.g. Tel Aviv, New York"></div>
+      </div>
+      <div class="add-fund-row" style="margin-bottom:12px">
+        <div class="form-group"><label class="form-label">Description</label><input class="form-input" id="newFundDesc" placeholder="Short description of the fund"></div>
+        <div class="form-group"><label class="form-label">Stages</label><input class="form-input" id="newFundStages" placeholder="Pre-Seed, Seed, Series A"></div>
+        <div class="form-group"><label class="form-label">Sectors</label><input class="form-input" id="newFundSectors" placeholder="AI, SaaS, Fintech"></div>
+      </div>
+      <div class="add-fund-row">
+        <div class="form-group"><label class="form-label">Key Partners</label><input class="form-input" id="newFundPartners" placeholder="Partner names (comma-separated)"></div>
+        <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button type="submit" class="btn btn-primary">Add Fund</button></div>
+      </div>
+    </form>
+  </div>
 
-    <div class="section">
-      <div class="section-title">My VC Pipeline</div>
-      <div id="pipelineEmpty" class="empty-state"><p>No VCs in your pipeline yet.</p><p style="font-size:.82rem">Browse below to add funds to your list!</p></div>
-      <div class="pipeline-card" id="pipelineCard" style="display:none">
-        <table class="pipeline-table"><thead><tr><th>Fund</th><th>Tier</th><th>Status</th><th>Notes</th><th style="width:170px">Actions</th></tr></thead><tbody id="pipelineBody"></tbody></table>
+  <div class="section">
+    <div class="section-title">Browse & Add VCs</div>
+    <div class="browse-toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search by name...">
+      </div>
+      <div class="filter-chips">
+        <button class="chip active" data-type="all" onclick="setFilter('all')">All</button>
+        <button class="chip" data-type="Israeli" onclick="setFilter('Israeli')">Israeli</button>
+        <button class="chip" data-type="International" onclick="setFilter('International')">International</button>
+        <button class="chip" data-type="Angel" onclick="setFilter('Angel')">Angel</button>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-title">Browse & Add VCs</div>
-      <div class="browse-toolbar">
-        <div class="search-box">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" id="searchInput" placeholder="Search by name...">
-        </div>
-        <div class="filter-chips">
-          <button class="chip active" data-type="all" onclick="setFilter('all')">All</button>
-          <button class="chip" data-type="Israeli" onclick="setFilter('Israeli')">Israeli</button>
-          <button class="chip" data-type="International" onclick="setFilter('International')">International</button>
-          <button class="chip" data-type="Angel" onclick="setFilter('Angel')">Angel</button>
-        </div>
-      </div>
-      <div class="vc-grid" id="vcGrid"></div>
-    </div>
+    <div class="vc-grid" id="vcGrid"></div>
   </div>
 </div>
 
-<div class="view" id="adminView">
-  <div class="admin-gate" id="adminGate">
-    <div class="admin-gate-card">
-      <h2>Admin Panel</h2>
+</div>
+<button class="admin-fab" onclick="openAdminPanel()" title="Admin Panel"><span class="fab-icon">&#128274;</span> Admin</button>
+
+<!-- ADMIN POPUP MODAL -->
+<div class="admin-backdrop" id="adminBackdrop" onclick="adminBackdropClick(event)">
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-panel-header">
+    <h2>Admin Panel</h2>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span id="syncStatus" style="font-size:.75rem;color:rgba(255,255,255,.6)"></span>
+      <button class="admin-panel-close" onclick="closeAdminPanel()">&times;</button>
+    </div>
+  </div>
+  <div class="admin-panel-body">
+    <div class="admin-gate-inline" id="adminGate">
       <p>Enter the admin password to continue</p>
       <div class="form-row"><input class="form-input" type="password" id="adminPwd" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdmin()"><button class="btn btn-primary" onclick="checkAdmin()">Enter</button></div>
     </div>
-  </div>
-  <div class="admin-content" id="adminContent">
-    <div class="admin-section">
-      <h3>Intro Request Queue</h3>
-      <div id="queueEmpty" class="empty-state" style="padding:24px"><p>No intro requests yet.</p></div>
-      <div style="overflow-x:auto"><table class="admin-table" id="queueTable" style="display:none"><thead><tr><th>Date</th><th>Company</th><th>LinkedIn</th><th>Target VC</th><th>One-Liner</th><th>Why This Fund</th><th>Intro Notes</th><th>Materials</th><th>Status</th></tr></thead><tbody id="queueBody"></tbody></table></div>
-    </div>
-    <div class="admin-section">
-      <h3>Generate Intro Email</h3>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
-        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Founder Name</label><input class="form-input" id="emailFounder" placeholder="Founder name"></div>
-        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Company</label><input class="form-input" id="emailCompany" placeholder="Company name"></div>
-        <div class="form-group" style="flex:1.5;min-width:180px"><label class="form-label">One-Liner</label><input class="form-input" id="emailOneLiner" placeholder="What they're building"></div>
-        <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Target VC</label><select class="form-input" id="emailVC"></select></div>
-        <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button class="btn btn-primary" onclick="generateEmail()">Generate</button></div>
+    <div id="adminContent" style="display:none">
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button class="btn btn-sm btn-outline" onclick="loadAdminData()">Refresh Data</button>
       </div>
-      <div class="email-output" id="emailOutput"><textarea id="emailText" rows="10"></textarea><div class="email-actions"><button class="btn btn-primary btn-sm" onclick="copyEmail()">Copy to Clipboard</button></div></div>
-    </div>
-    <div class="admin-section">
-      <h3>Manage VCs</h3>
-      <p style="font-size:.85rem;color:var(--text-sec);margin-bottom:12px">Add a new VC to the master database</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
-        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCName" placeholder="Fund Name"></div>
-        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCWeb" placeholder="Website"></div>
-        <div class="form-group" style="flex:0 0 140px"><select class="form-input" id="adminVCType"><option>Israeli</option><option>International</option><option>Angel</option></select></div>
-        <div class="form-group" style="flex:1;min-width:140px"><input class="form-input" id="adminVCDesc" placeholder="Short description"></div>
-        <div class="form-group" style="flex:0"><button class="btn btn-primary" onclick="adminAddVC()">Add VC</button></div>
+      <div class="admin-section">
+        <h3>Registered Companies</h3>
+        <div id="regEmpty" class="empty-state" style="padding:16px"><p>No registered companies yet.</p></div>
+        <div style="overflow-x:auto"><table class="admin-table" id="regTable" style="display:none"><thead><tr><th>Date</th><th>Company</th><th>Founder</th><th>Email</th><th>LinkedIn</th><th>One-Liner</th></tr></thead><tbody id="regBody"></tbody></table></div>
       </div>
-      <div id="customVCList" style="margin-top:12px"></div>
+      <div class="admin-section">
+        <h3>Founder Pipelines</h3>
+        <div id="pipelinesEmpty" class="empty-state" style="padding:16px"><p>No founder pipelines yet.</p></div>
+        <div id="founderPipelines"></div>
+      </div>
+      <div class="admin-section">
+        <h3>Intro Request Queue</h3>
+        <div id="queueEmpty" class="empty-state" style="padding:16px"><p>No intro requests yet.</p></div>
+        <div style="overflow-x:auto"><table class="admin-table" id="queueTable" style="display:none"><thead><tr><th>Date</th><th>Company</th><th>Founder</th><th>LinkedIn</th><th>Target VC</th><th>One-Liner</th><th>Why</th><th>Notes</th><th>Status</th><th></th></tr></thead><tbody id="queueBody"></tbody></table></div>
+      </div>
+      <div class="admin-section">
+        <h3>Generate Intro Email</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Founder</label><input class="form-input" id="emailFounder" placeholder="Name"></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Company</label><input class="form-input" id="emailCompany" placeholder="Company"></div>
+          <div class="form-group" style="flex:1.5;min-width:160px"><label class="form-label">One-Liner</label><input class="form-input" id="emailOneLiner" placeholder="What they build"></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Target VC</label><select class="form-input" id="emailVC"></select></div>
+          <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button class="btn btn-primary btn-sm" onclick="generateEmail()">Generate</button></div>
+        </div>
+        <div class="email-output" id="emailOutput"><textarea id="emailText" rows="8"></textarea><div class="email-actions"><button class="btn btn-primary btn-sm" onclick="copyEmail()">Copy to Clipboard</button></div></div>
+      </div>
+      <div class="admin-section">
+        <h3>Manage VCs</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px">
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Fund Name *</label><input class="form-input" id="adminVCName" placeholder="Fund Name"></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Website</label><input class="form-input" id="adminVCWeb" placeholder="https://..."></div>
+          <div class="form-group" style="flex:0 0 120px"><label class="form-label">Type</label><select class="form-input" id="adminVCType"><option>Israeli</option><option>International</option><option>Angel</option></select></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Location</label><input class="form-input" id="adminVCLoc" placeholder="e.g. Tel Aviv"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px">
+          <div class="form-group" style="flex:1.5;min-width:140px"><label class="form-label">Description</label><input class="form-input" id="adminVCDesc" placeholder="Short description"></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Stages</label><input class="form-input" id="adminVCStages" placeholder="Pre-Seed, Seed, A"></div>
+          <div class="form-group" style="flex:1;min-width:120px"><label class="form-label">Sectors</label><input class="form-input" id="adminVCSectors" placeholder="AI, SaaS, Fintech"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+          <div class="form-group" style="flex:1;min-width:140px"><label class="form-label">Key Partners</label><input class="form-input" id="adminVCPartners" placeholder="Partner names (comma-separated)"></div>
+          <div class="form-group" style="flex:0"><label class="form-label">&nbsp;</label><button class="btn btn-primary btn-sm" onclick="adminAddVC()">Add VC</button></div>
+        </div>
+        <div id="customVCList" style="margin-top:10px"></div>
+      </div>
     </div>
   </div>
 </div>
-
 </div>
 
+<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detailModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeDetail()">&times;</button>
@@ -316,6 +387,7 @@ select.form-input{cursor:pointer;appearance:auto}
   </div>
 </div>
 
+<!-- INTRO MODAL -->
 <div class="intro-overlay" id="introModal">
   <div class="intro-box">
     <button class="modal-close" onclick="closeIntro()">&times;</button>
@@ -1539,15 +1611,45 @@ const vcData = [
 ]
 
 
+// ===== CONFIG =====
+var FIREBASE_URL = 'https://speedrun-israel-vcs-default-rtdb.firebaseio.com';
+
 // ===== APP STATE =====
 var currentUser = null;
 var pipeline = [];
 var customVCs = [];
 var introRequests = [];
+var allRegistrations = [];
+var allPipelines = {};
 var searchQuery = '';
 var activeFilter = 'all';
 var selectedIntroVC = null;
 var _detailVcId = null;
+
+// ===== FIREBASE =====
+function fbPut(path, data) {
+  if (!FIREBASE_URL) return;
+  var x = new XMLHttpRequest();
+  x.open('PUT', FIREBASE_URL + '/' + path + '.json', true);
+  x.setRequestHeader('Content-Type', 'application/json');
+  x.send(JSON.stringify(data));
+}
+
+function fbGet(path, callback) {
+  if (!FIREBASE_URL) { callback(null); return; }
+  var x = new XMLHttpRequest();
+  x.open('GET', FIREBASE_URL + '/' + path + '.json', true);
+  x.onload = function() {
+    try { callback(JSON.parse(x.responseText)); }
+    catch(e) { callback(null); }
+  };
+  x.onerror = function() { callback(null); };
+  x.send();
+}
+
+function safeKey(email) {
+  return (email || 'unknown').replace(/[.#$\[\]]/g, '_');
+}
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -1558,6 +1660,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('welcomePopup').classList.add('active');
   }
 
+  document.getElementById('signInForm').addEventListener('submit', handleSignIn);
   document.getElementById('regForm').addEventListener('submit', handleReg);
   document.getElementById('addFundForm').addEventListener('submit', handleAddFund);
   document.getElementById('introForm').addEventListener('submit', handleIntroSubmit);
@@ -1573,6 +1676,15 @@ document.addEventListener('DOMContentLoaded', function() {
   renderGrid();
   renderPipeline();
   populateEmailVC();
+
+  // Load shared custom VCs from Firebase
+  loadCustomVCsFromFirebase(function() {
+    renderGrid();
+    renderPipeline();
+    populateEmailVC();
+  });
+
+  // Admin always starts locked — password required each session
 });
 
 // ===== DATA =====
@@ -1603,12 +1715,74 @@ function saveData() {
   localStorage.setItem('sr_requests', JSON.stringify(introRequests));
 }
 
+function syncPipeline() {
+  if (!currentUser || !currentUser.email) return;
+  fbPut('pipelines/' + safeKey(currentUser.email), {
+    user: currentUser,
+    pipeline: pipeline,
+    lastUpdated: new Date().toISOString()
+  });
+}
+
+function syncCustomVCs() {
+  fbPut('customVCs', customVCs);
+}
+
+function loadCustomVCsFromFirebase(callback) {
+  fbGet('customVCs', function(data) {
+    if (data && Array.isArray(data) && data.length > 0) {
+      customVCs = data;
+      saveData();
+    }
+    if (callback) callback();
+  });
+}
+
 function closeWelcome() {
   document.getElementById('welcomePopup').classList.remove('active');
   localStorage.setItem('sr_welcomed', '1');
 }
 
-// ===== AUTH =====
+// ===== SIGN IN / REGISTER TOGGLE =====
+function showRegForm() {
+  document.getElementById('signInCard').style.display = 'none';
+  document.getElementById('regCard').style.display = 'block';
+  document.getElementById('signInError').style.display = 'none';
+}
+
+function showSignIn() {
+  document.getElementById('regCard').style.display = 'none';
+  document.getElementById('signInCard').style.display = 'block';
+}
+
+function handleSignIn(e) {
+  e.preventDefault();
+  var email = document.getElementById('signInEmail').value.trim();
+  if (!email) return;
+  document.getElementById('signInError').style.display = 'none';
+
+  // Look up user in Firebase
+  fbGet('registrations/' + safeKey(email), function(data) {
+    if (data && data.email) {
+      // Found! Restore user
+      currentUser = data;
+      localStorage.setItem('sr_user', JSON.stringify(currentUser));
+
+      // Also restore pipeline from Firebase
+      fbGet('pipelines/' + safeKey(email), function(pData) {
+        if (pData && pData.pipeline) {
+          pipeline = pData.pipeline;
+          saveData();
+        }
+        showDashboard();
+      });
+    } else {
+      document.getElementById('signInError').style.display = 'block';
+    }
+  });
+}
+
+// ===== AUTH (persistent) =====
 function handleReg(e) {
   e.preventDefault();
   currentUser = {
@@ -1617,9 +1791,12 @@ function handleReg(e) {
     email: document.getElementById('regEmail').value,
     linkedIn: document.getElementById('regLinkedIn').value,
     blurb: document.getElementById('regBlurb').value,
-    materials: document.getElementById('regFileName').textContent || null
+    materials: document.getElementById('regFileName').textContent || null,
+    registeredAt: new Date().toISOString()
   };
   localStorage.setItem('sr_user', JSON.stringify(currentUser));
+  fbPut('registrations/' + safeKey(currentUser.email), currentUser);
+  syncPipeline();
   showDashboard();
 }
 
@@ -1646,37 +1823,32 @@ function logout() {
   document.getElementById('regForm').reset();
 }
 
-// ===== VIEWS =====
-function switchView(view) {
-  var views = document.querySelectorAll('.view');
-  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
-  var btns = document.querySelectorAll('.nav-btn');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+// ===== ADMIN POPUP MODAL =====
+function openAdminPanel() {
+  document.getElementById('adminBackdrop').classList.add('active');
+  setTimeout(function() { document.getElementById('adminPanel').classList.add('open'); }, 10);
+  document.body.style.overflow = 'hidden';
+  // Always show password gate on open
+  document.getElementById('adminGate').style.display = 'block';
+  document.getElementById('adminContent').style.display = 'none';
+  document.getElementById('adminPwd').value = '';
+}
 
-  if (view === 'founder') {
-    document.getElementById('founderView').classList.add('active');
-    document.querySelector('[data-view="founder"]').classList.add('active');
-  } else if (view === 'admin') {
-    document.getElementById('adminView').classList.add('active');
-    document.querySelector('[data-view="admin"]').classList.add('active');
-    if (sessionStorage.getItem('sr_admin')) {
-      document.getElementById('adminGate').style.display = 'none';
-      document.getElementById('adminContent').style.display = 'block';
-      renderQueue();
-      renderCustomVCList();
-    } else {
-      document.getElementById('adminGate').style.display = 'block';
-      document.getElementById('adminContent').style.display = 'none';
-    }
-  }
+function closeAdminPanel() {
+  document.getElementById('adminPanel').classList.remove('open');
+  setTimeout(function() { document.getElementById('adminBackdrop').classList.remove('active'); }, 250);
+  document.body.style.overflow = '';
+}
+
+function adminBackdropClick(e) {
+  if (e.target === document.getElementById('adminBackdrop')) closeAdminPanel();
 }
 
 function checkAdmin() {
   if (document.getElementById('adminPwd').value === 'speedrun2026') {
-    sessionStorage.setItem('sr_admin', '1');
     document.getElementById('adminGate').style.display = 'none';
     document.getElementById('adminContent').style.display = 'block';
-    renderQueue();
+    loadAdminData();
     populateEmailVC();
     renderCustomVCList();
   } else {
@@ -1684,28 +1856,84 @@ function checkAdmin() {
   }
 }
 
+function loadAdminData() {
+  var statusEl = document.getElementById('syncStatus');
+  if (!FIREBASE_URL) {
+    if (statusEl) statusEl.textContent = 'Not connected';
+    renderQueue(); renderRegistrations(); renderFounderPipelines(); renderCustomVCList();
+    return;
+  }
+  if (statusEl) statusEl.textContent = 'Syncing...';
+
+  var done = 0;
+  function checkDone() {
+    done++;
+    if (done >= 3) {
+      if (statusEl) statusEl.textContent = 'Synced ' + new Date().toLocaleTimeString();
+      renderRegistrations();
+      renderQueue();
+      renderFounderPipelines();
+      renderCustomVCList();
+    }
+  }
+
+  fbGet('registrations', function(data) {
+    allRegistrations = [];
+    if (data) {
+      var keys = Object.keys(data);
+      for (var i = 0; i < keys.length; i++) allRegistrations.push(data[keys[i]]);
+    }
+    checkDone();
+  });
+
+  fbGet('introRequests', function(data) {
+    if (data) {
+      introRequests = [];
+      var keys = Object.keys(data);
+      for (var i = 0; i < keys.length; i++) introRequests.push(data[keys[i]]);
+      saveData();
+    }
+    checkDone();
+  });
+
+  fbGet('pipelines', function(data) {
+    allPipelines = data || {};
+    checkDone();
+  });
+}
+
 // ===== ADD FUND =====
+function splitComma(str) {
+  if (!str) return [];
+  return str.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
+}
+
 function handleAddFund(e) {
   e.preventDefault();
   var name = document.getElementById('newFundName').value.trim();
   if (!name) return;
-
   var ids = getAllVCs().map(function(v) { return v.id; });
   var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0;
+  var loc = document.getElementById('newFundLoc').value.trim() || 'Not specified';
+  var desc = document.getElementById('newFundDesc').value.trim();
+  var stages = splitComma(document.getElementById('newFundStages').value);
+  var sectors = splitComma(document.getElementById('newFundSectors').value);
+  var partners = splitComma(document.getElementById('newFundPartners').value);
   var vc = {
     id: maxId + 1, name: name,
     website: document.getElementById('newFundWeb').value || '',
     type: document.getElementById('newFundType').value,
-    shortDescription: document.getElementById('newFundDesc').value || name,
-    longDescription: document.getElementById('newFundDesc').value || '',
+    shortDescription: desc || name,
+    longDescription: desc || '',
     logo: name.substring(0, 3).toUpperCase(),
     logoColor: '#' + Math.floor(Math.random() * 0xCCCCCC + 0x333333).toString(16),
-    location: 'Custom', whyIsrael: '', keyPartners: [], examplePortfolio: [],
-    stages: [], sectors: [], activeInIsrael: true,
+    location: loc, whyIsrael: '', keyPartners: partners, examplePortfolio: [],
+    stages: stages, sectors: sectors, activeInIsrael: true,
     notes: '', introAvailable: true, relationshipStrength: 'New'
   };
   customVCs.push(vc);
   saveData();
+  syncCustomVCs();
   document.getElementById('addFundForm').reset();
   renderGrid();
 }
@@ -1718,23 +1946,23 @@ function addToPipeline(vcId) {
   for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
   if (!vc) return;
   pipeline.push({ vcId: vcId, vcName: vc.name, tier: 'Tier 1', status: 'Researching', notes: '', dateAdded: new Date().toISOString() });
-  saveData(); renderGrid(); renderPipeline();
+  saveData(); syncPipeline(); renderGrid(); renderPipeline();
 }
 
 function removeFromPipeline(vcId) {
   pipeline = pipeline.filter(function(p) { return p.vcId !== vcId; });
-  saveData(); renderGrid(); renderPipeline();
+  saveData(); syncPipeline(); renderGrid(); renderPipeline();
 }
 
 function updatePipeline(vcId, field, value) {
   for (var i = 0; i < pipeline.length; i++) {
-    if (pipeline[i].vcId === vcId) { pipeline[i][field] = value; saveData(); break; }
+    if (pipeline[i].vcId === vcId) { pipeline[i][field] = value; saveData(); syncPipeline(); break; }
   }
 }
 
 function updatePipelineStatus(vcId, value) {
   for (var i = 0; i < pipeline.length; i++) {
-    if (pipeline[i].vcId === vcId) { pipeline[i].status = value; saveData(); break; }
+    if (pipeline[i].vcId === vcId) { pipeline[i].status = value; saveData(); syncPipeline(); break; }
   }
   renderPipeline();
 }
@@ -1742,13 +1970,13 @@ function updatePipelineStatus(vcId, value) {
 function renderPipeline() {
   var empty = document.getElementById('pipelineEmpty');
   var card = document.getElementById('pipelineCard');
-
-  if (pipeline.length === 0) { empty.style.display = 'block'; card.style.display = 'none'; return; }
+  var exportBtn = document.getElementById('exportBtn');
+  if (pipeline.length === 0) { empty.style.display = 'block'; card.style.display = 'none'; if (exportBtn) exportBtn.style.display = 'none'; return; }
   empty.style.display = 'none'; card.style.display = 'block';
+  if (exportBtn) exportBtn.style.display = 'inline-flex';
 
   var tiers = ['Tier 1','Tier 2','Tier 3'];
   var statuses = ['Researching','Looking for warm intro','Intro by Speedrun','Emailed','Meeting scheduled','In process','Passed'];
-
   var html = '';
   var all = getAllVCs();
   for (var i = 0; i < pipeline.length; i++) {
@@ -1757,18 +1985,14 @@ function renderPipeline() {
     for (var j = 0; j < all.length; j++) { if (all[j].id === item.vcId) { vc = all[j]; break; } }
     var tp = vc ? vc.type : 'Custom';
     var notesEsc = (item.notes || '').replace(/"/g, '&quot;');
-
     var tierOpts = '';
     for (var t = 0; t < tiers.length; t++) tierOpts += '<option' + (item.tier === tiers[t] ? ' selected' : '') + '>' + tiers[t] + '</option>';
-
     var statusOpts = '';
     for (var s = 0; s < statuses.length; s++) statusOpts += '<option' + (item.status === statuses[s] ? ' selected' : '') + '>' + statuses[s] + '</option>';
-
     var introBtn = '';
     if (item.status === 'Intro by Speedrun') {
       introBtn = '<button class="btn btn-primary btn-sm" onclick="openIntro(' + item.vcId + ')">Request Intro</button>';
     }
-
     html += '<tr>' +
       '<td><span class="vc-name">' + item.vcName + '</span><span class="type-tag">' + tp + '</span></td>' +
       '<td><select onchange="updatePipeline(' + item.vcId + ',\'tier\',this.value)">' + tierOpts + '</select></td>' +
@@ -1779,6 +2003,39 @@ function renderPipeline() {
       '</tr>';
   }
   document.getElementById('pipelineBody').innerHTML = html;
+}
+
+// ===== EXPORT PIPELINE =====
+function exportPipeline() {
+  if (pipeline.length === 0) return;
+  var all = getAllVCs();
+  var rows = [['Fund','Type','Location','Tier','Status','Notes','Date Added']];
+  for (var i = 0; i < pipeline.length; i++) {
+    var item = pipeline[i];
+    var vc = null;
+    for (var j = 0; j < all.length; j++) { if (all[j].id === item.vcId) { vc = all[j]; break; } }
+    var csvEsc = function(s) { s = (s || '').replace(/"/g, '""'); return '"' + s + '"'; };
+    rows.push([
+      csvEsc(item.vcName),
+      csvEsc(vc ? vc.type : ''),
+      csvEsc(vc ? vc.location : ''),
+      csvEsc(item.tier),
+      csvEsc(item.status),
+      csvEsc(item.notes),
+      csvEsc(item.dateAdded ? new Date(item.dateAdded).toLocaleDateString() : '')
+    ]);
+  }
+  var csv = '';
+  for (var r = 0; r < rows.length; r++) csv += rows[r].join(',') + '\n';
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = (currentUser ? currentUser.company.replace(/\s+/g, '-') : 'pipeline') + '-vc-pipeline.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ===== BROWSE GRID =====
@@ -1800,17 +2057,14 @@ function renderGrid() {
     if (searchQuery && vc.name.toLowerCase().indexOf(searchQuery.toLowerCase()) === -1) continue;
     filtered.push(vc);
   }
-
   var html = '';
   for (var i = 0; i < filtered.length; i++) {
     var vc = filtered[i];
     var inP = false;
     for (var j = 0; j < pipeline.length; j++) { if (pipeline[j].vcId === vc.id) { inP = true; break; } }
-
     var btnHtml = inP
       ? '<button class="btn btn-success btn-sm" disabled>Added &#10003;</button>'
       : '<button class="btn btn-primary btn-sm" onclick="addToPipeline(' + vc.id + ')">Add to Pipeline</button>';
-
     html += '<div class="vc-card">' +
       '<div class="card-top">' +
         '<div class="card-logo" style="background:' + vc.logoColor + '">' + vc.logo + '</div>' +
@@ -1835,47 +2089,33 @@ function openDetail(vcId) {
   for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
   if (!vc) return;
   _detailVcId = vcId;
-
   document.getElementById('detailName').textContent = vc.name;
   document.getElementById('detailLoc').textContent = vc.location;
   document.getElementById('detailType').textContent = vc.type;
   document.getElementById('detailWeb').href = vc.website || '#';
   document.getElementById('detailLong').textContent = vc.longDescription || vc.shortDescription;
   document.getElementById('detailWhy').textContent = vc.whyIsrael || 'Active in the Israeli startup ecosystem.';
-
   var stagesHtml = '';
   if (vc.stages) for (var i = 0; i < vc.stages.length; i++) stagesHtml += '<span>' + vc.stages[i] + '</span>';
   document.getElementById('detailStages').innerHTML = stagesHtml;
-
   var sectorsHtml = '';
   if (vc.sectors) for (var i = 0; i < vc.sectors.length; i++) sectorsHtml += '<span>' + vc.sectors[i] + '</span>';
   document.getElementById('detailSectors').innerHTML = sectorsHtml;
-
   var partners = vc.keyPartners || [];
   document.getElementById('detailPartnersSection').style.display = partners.length ? 'block' : 'none';
   var pH = '';
   for (var i = 0; i < partners.length; i++) pH += '<span>' + partners[i] + '</span>';
   document.getElementById('detailPartners').innerHTML = pH;
-
   var portfolio = vc.examplePortfolio || [];
   document.getElementById('detailPortfolioSection').style.display = portfolio.length ? 'block' : 'none';
   var pfH = '';
   for (var i = 0; i < portfolio.length; i++) pfH += '<span>' + portfolio[i] + '</span>';
   document.getElementById('detailPortfolio').innerHTML = pfH;
-
   var inP = false;
   for (var i = 0; i < pipeline.length; i++) { if (pipeline[i].vcId === vcId) { inP = true; break; } }
   var addBtn = document.getElementById('detailAddBtn');
-  if (inP) {
-    addBtn.textContent = 'Already in Pipeline \u2713';
-    addBtn.className = 'btn btn-success';
-    addBtn.disabled = true;
-  } else {
-    addBtn.textContent = 'Add to Pipeline';
-    addBtn.className = 'btn btn-primary';
-    addBtn.disabled = false;
-  }
-
+  if (inP) { addBtn.textContent = 'Already in Pipeline \u2713'; addBtn.className = 'btn btn-success'; addBtn.disabled = true; }
+  else { addBtn.textContent = 'Add to Pipeline'; addBtn.className = 'btn btn-primary'; addBtn.disabled = false; }
   document.getElementById('detailModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1917,12 +2157,12 @@ function handleIntroSubmit(e) {
   var all = getAllVCs();
   var vc = null;
   for (var i = 0; i < all.length; i++) { if (all[i].id === selectedIntroVC) { vc = all[i]; break; } }
-
   var req = {
     id: Date.now(),
     date: new Date().toLocaleDateString(),
     company: currentUser.company,
     founder: currentUser.name,
+    email: currentUser.email,
     linkedIn: currentUser.linkedIn,
     oneLiner: currentUser.blurb,
     materials: currentUser.materials || null,
@@ -1934,13 +2174,83 @@ function handleIntroSubmit(e) {
   };
   introRequests.push(req);
   saveData();
-
+  fbPut('introRequests/' + req.id, req);
   document.getElementById('introForm').style.display = 'none';
   document.getElementById('introSuccess').classList.add('show');
   setTimeout(function() { closeIntro(); renderPipeline(); }, 2000);
 }
 
-// ===== ADMIN =====
+// ===== ADMIN RENDERS =====
+function renderRegistrations() {
+  var emptyEl = document.getElementById('regEmpty');
+  var tableEl = document.getElementById('regTable');
+  if (!emptyEl || !tableEl) return;
+  if (allRegistrations.length === 0) { emptyEl.style.display = 'block'; tableEl.style.display = 'none'; return; }
+  emptyEl.style.display = 'none'; tableEl.style.display = 'table';
+  var html = '';
+  for (var i = 0; i < allRegistrations.length; i++) {
+    var r = allRegistrations[i];
+    var date = r.registeredAt ? new Date(r.registeredAt).toLocaleDateString() : '-';
+    var liHtml = r.linkedIn ? '<a href="' + r.linkedIn + '" target="_blank" style="color:var(--accent)">Profile</a>' : '-';
+    html += '<tr><td>' + date + '</td><td><strong>' + (r.company || '-') + '</strong></td><td>' + (r.name || '-') + '</td><td><a href="mailto:' + (r.email || '') + '" style="color:var(--accent)">' + (r.email || '-') + '</a></td><td>' + liHtml + '</td><td style="max-width:180px">' + (r.blurb || '-') + '</td></tr>';
+  }
+  document.getElementById('regBody').innerHTML = html;
+}
+
+function renderFounderPipelines() {
+  var container = document.getElementById('founderPipelines');
+  var emptyEl = document.getElementById('pipelinesEmpty');
+  if (!container) return;
+  var keys = Object.keys(allPipelines);
+  if (keys.length === 0) { emptyEl.style.display = 'block'; container.innerHTML = ''; return; }
+  emptyEl.style.display = 'none';
+
+  var statuses = ['Researching','Looking for warm intro','Intro by Speedrun','Emailed','Meeting scheduled','In process','Passed'];
+  var html = '';
+  for (var k = 0; k < keys.length; k++) {
+    var entry = allPipelines[keys[k]];
+    var user = entry.user || {};
+    var pl = entry.pipeline || [];
+    var updated = entry.lastUpdated ? new Date(entry.lastUpdated).toLocaleDateString() : '';
+    var statusCounts = {};
+    for (var s = 0; s < pl.length; s++) {
+      var st = pl[s].status || 'Researching';
+      statusCounts[st] = (statusCounts[st] || 0) + 1;
+    }
+    var summaryParts = [];
+    for (var si = 0; si < statuses.length; si++) {
+      if (statusCounts[statuses[si]]) summaryParts.push(statusCounts[statuses[si]] + ' ' + statuses[si]);
+    }
+
+    html += '<div class="founder-accordion">';
+    html += '<div class="founder-acc-header" onclick="toggleAccordion(this)">';
+    html += '<div><span class="fa-name">' + (user.company || 'Unknown') + '</span> &mdash; <span class="fa-meta">' + (user.name || '') + ' &middot; ' + pl.length + ' VCs &middot; Updated ' + updated + '</span></div>';
+    html += '<span class="fa-arrow">&#9660;</span></div>';
+    html += '<div class="founder-acc-body">';
+    if (pl.length === 0) {
+      html += '<p style="color:var(--text-sec);font-size:.82rem">Empty pipeline</p>';
+    } else {
+      html += '<table class="admin-table"><thead><tr><th>Fund</th><th>Tier</th><th>Status</th><th>Notes</th></tr></thead><tbody>';
+      for (var p = 0; p < pl.length; p++) {
+        var item = pl[p];
+        html += '<tr><td><strong>' + (item.vcName || '-') + '</strong></td><td>' + (item.tier || '-') + '</td><td>' + (item.status || '-') + '</td><td style="max-width:150px">' + (item.notes || '-') + '</td></tr>';
+      }
+      html += '</tbody></table>';
+    }
+    if (summaryParts.length > 0) {
+      html += '<div style="margin-top:8px;font-size:.75rem;color:var(--text-sec)">Summary: ' + summaryParts.join(', ') + '</div>';
+    }
+    html += '</div></div>';
+  }
+  container.innerHTML = html;
+}
+
+function toggleAccordion(el) {
+  el.classList.toggle('expanded');
+  var body = el.nextElementSibling;
+  body.classList.toggle('show');
+}
+
 function renderQueue() {
   if (introRequests.length === 0) {
     document.getElementById('queueEmpty').style.display = 'block';
@@ -1954,28 +2264,50 @@ function renderQueue() {
   var html = '';
   for (var i = 0; i < introRequests.length; i++) {
     var r = introRequests[i];
-    var linkedInHtml = r.linkedIn ? '<a href="' + r.linkedIn + '" target="_blank" style="color:var(--accent)">Profile</a>' : '-';
+    var liHtml = r.linkedIn ? '<a href="' + r.linkedIn + '" target="_blank" style="color:var(--accent)">Profile</a>' : '-';
     var statusOpts = '';
     for (var s = 0; s < statuses.length; s++) statusOpts += '<option' + (r.status === statuses[s] ? ' selected' : '') + '>' + statuses[s] + '</option>';
-
     html += '<tr>' +
       '<td>' + r.date + '</td>' +
-      '<td>' + r.company + '</td>' +
-      '<td>' + linkedInHtml + '</td>' +
+      '<td><strong>' + r.company + '</strong></td>' +
+      '<td>' + (r.founder || '-') + '</td>' +
+      '<td>' + liHtml + '</td>' +
       '<td>' + r.targetVCName + '</td>' +
-      '<td style="max-width:200px">' + (r.oneLiner || '-') + '</td>' +
-      '<td style="max-width:150px">' + (r.whyThisFund || '-') + '</td>' +
-      '<td style="max-width:150px">' + (r.introNotes || '-') + '</td>' +
-      '<td>' + (r.materials || '-') + '</td>' +
+      '<td style="max-width:140px">' + (r.oneLiner || '-') + '</td>' +
+      '<td style="max-width:100px">' + (r.whyThisFund || '-') + '</td>' +
+      '<td style="max-width:100px">' + (r.introNotes || '-') + '</td>' +
       '<td><select onchange="updateReqStatus(' + r.id + ',this.value)">' + statusOpts + '</select></td>' +
+      '<td><button class="btn btn-primary btn-sm" onclick="makeIntroFromRequest(' + r.id + ')">Make Intro</button></td>' +
       '</tr>';
   }
   document.getElementById('queueBody').innerHTML = html;
 }
 
+function makeIntroFromRequest(id) {
+  var r = null;
+  for (var i = 0; i < introRequests.length; i++) {
+    if (introRequests[i].id === id) { r = introRequests[i]; break; }
+  }
+  if (!r) return;
+  document.getElementById('emailFounder').value = r.founder || '';
+  document.getElementById('emailCompany').value = r.company || '';
+  document.getElementById('emailOneLiner').value = r.oneLiner || '';
+  var vcSel = document.getElementById('emailVC');
+  if (r.targetVC) vcSel.value = r.targetVC;
+  document.getElementById('emailOutput').style.display = 'none';
+  generateEmail();
+  var emailSection = document.getElementById('emailOutput');
+  emailSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 function updateReqStatus(id, status) {
   for (var i = 0; i < introRequests.length; i++) {
-    if (introRequests[i].id === id) { introRequests[i].status = status; saveData(); break; }
+    if (introRequests[i].id === id) {
+      introRequests[i].status = status;
+      saveData();
+      fbPut('introRequests/' + id + '/status', status);
+      break;
+    }
   }
 }
 
@@ -1996,29 +2328,18 @@ function generateEmail() {
   var all = getAllVCs();
   var vc = null;
   for (var i = 0; i < all.length; i++) { if (all[i].id === vcId) { vc = all[i]; break; } }
-
   if (!founder || !company || !oneLiner || !vc) { alert('Please fill in all fields'); return; }
-
   var partnerName = (vc.keyPartners && vc.keyPartners.length > 0) ? vc.keyPartners[0] : vc.name + ' Team';
   var sectorStr = (vc.sectors && vc.sectors.length > 0) ? vc.sectors.slice(0, 3).join(', ') : 'innovative technology';
-
   var subject = 'Intro: ' + company + ' \u00D7 ' + vc.name + ' \u2014 via Speedrun';
-  var body = 'Hi ' + partnerName + ',\n\n' +
-    'I hope this message finds you well! I\'m reaching out from the Speedrun program (a16z) to introduce you to a founder we think could be a great fit for ' + vc.name + '.\n\n' +
-    founder + ' is building ' + company + ' \u2014 ' + oneLiner + '\n\n' +
-    'Given your focus on ' + sectorStr + ', I think there\'s a compelling alignment here.\n\n' +
-    'Would you be open to a brief intro? Happy to share more context or a deck if helpful.\n\n' +
-    'Best regards,\nSpeedrun Team';
-
+  var body = 'Hi ' + partnerName + ',\n\nI hope this message finds you well! I\'m reaching out from the Speedrun program (a16z) to introduce you to a founder we think could be a great fit for ' + vc.name + '.\n\n' + founder + ' is building ' + company + ' \u2014 ' + oneLiner + '\n\nGiven your focus on ' + sectorStr + ', I think there\'s a compelling alignment here.\n\nWould you be open to a brief intro? Happy to share more context or a deck if helpful.\n\nBest regards,\nSpeedrun Team';
   document.getElementById('emailText').value = 'Subject: ' + subject + '\n\n' + body;
   document.getElementById('emailOutput').style.display = 'block';
 }
 
 function copyEmail() {
   var text = document.getElementById('emailText').value;
-  navigator.clipboard.writeText(text).then(function() {
-    alert('Copied to clipboard!');
-  });
+  navigator.clipboard.writeText(text).then(function() { alert('Copied to clipboard!'); });
 }
 
 function adminAddVC() {
@@ -2026,34 +2347,46 @@ function adminAddVC() {
   if (!name) return;
   var ids = getAllVCs().map(function(v) { return v.id; });
   var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0;
-  customVCs.push({
+  var loc = document.getElementById('adminVCLoc').value.trim() || 'Not specified';
+  var desc = document.getElementById('adminVCDesc').value.trim();
+  var stages = splitComma(document.getElementById('adminVCStages').value);
+  var sectors = splitComma(document.getElementById('adminVCSectors').value);
+  var partners = splitComma(document.getElementById('adminVCPartners').value);
+  var newVC = {
     id: maxId + 1, name: name,
     website: document.getElementById('adminVCWeb').value || '',
     type: document.getElementById('adminVCType').value,
-    shortDescription: document.getElementById('adminVCDesc').value || name,
-    longDescription: document.getElementById('adminVCDesc').value || '',
+    shortDescription: desc || name,
+    longDescription: desc || '',
     logo: name.substring(0, 3).toUpperCase(),
     logoColor: '#' + Math.floor(Math.random() * 0xCCCCCC + 0x333333).toString(16),
-    location: 'Custom', whyIsrael: '', keyPartners: [], examplePortfolio: [],
-    stages: [], sectors: [], activeInIsrael: true, notes: '',
+    location: loc, whyIsrael: '', keyPartners: partners, examplePortfolio: [],
+    stages: stages, sectors: sectors, activeInIsrael: true, notes: '',
     introAvailable: true, relationshipStrength: 'New'
-  });
+  };
+  customVCs.push(newVC);
   saveData();
+  syncCustomVCs();
   document.getElementById('adminVCName').value = '';
   document.getElementById('adminVCWeb').value = '';
   document.getElementById('adminVCDesc').value = '';
+  document.getElementById('adminVCLoc').value = '';
+  document.getElementById('adminVCStages').value = '';
+  document.getElementById('adminVCSectors').value = '';
+  document.getElementById('adminVCPartners').value = '';
   renderGrid(); populateEmailVC(); renderCustomVCList();
 }
 
 function renderCustomVCList() {
   var el = document.getElementById('customVCList');
+  if (!el) return;
   if (customVCs.length === 0) { el.innerHTML = ''; return; }
-  var html = '<p style="font-size:.82rem;color:var(--text-sec);margin-bottom:8px">Custom VCs added:</p>';
+  var html = '<p style="font-size:.78rem;color:var(--text-sec);margin-bottom:6px">Custom VCs:</p>';
   for (var i = 0; i < customVCs.length; i++) {
     var vc = customVCs[i];
-    html += '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border-light)">' +
-      '<span style="font-weight:600;font-size:.85rem">' + vc.name + '</span>' +
-      '<span style="font-size:.78rem;color:var(--text-sec)">' + vc.type + '</span>' +
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--border-light)">' +
+      '<span style="font-weight:600;font-size:.8rem">' + vc.name + '</span>' +
+      '<span style="font-size:.72rem;color:var(--text-sec)">' + vc.type + '</span>' +
       '<button class="btn-ghost" onclick="removeCustomVC(' + vc.id + ')" style="margin-left:auto">&times;</button></div>';
   }
   el.innerHTML = html;
@@ -2061,7 +2394,7 @@ function renderCustomVCList() {
 
 function removeCustomVC(id) {
   customVCs = customVCs.filter(function(v) { return v.id !== id; });
-  saveData(); renderGrid(); renderPipeline(); populateEmailVC(); renderCustomVCList();
+  saveData(); syncCustomVCs(); renderGrid(); renderPipeline(); populateEmailVC(); renderCustomVCList();
 }
 
 // Close modals on overlay click
